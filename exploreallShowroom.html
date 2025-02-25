@@ -5,22 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="./output.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-  <style>
-    .carousel-root {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .slider {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-
-    .slide {
-      flex: 0 0 100%;
-    }
-  </style>
 </head>
 
 <body>
@@ -374,7 +358,7 @@
                   class="w-full relative flex text-center sm:text-left transition-all transform duration-500 delay-200 ease-in opacity-0 items-center justify-center "
                   style="transform: translate3d(0px, -6px, 0px);">
                   <h3 id="tip-title"
-                    class="text-theme-blue uppercase font-serif text-3xl leading-none sm:text-4/5xl sm:leading-tight pt-6 xl:pt-0 md:text-4xl  md:leading-none false">
+                    class="text-theme-blue uppercase font-serif text-3xl leading-none sm:text-4/5xl sm:leading-tight pt-6 xl:pt-0  md:text-4xl  md:leading-none false">
                     E-meet your e-ring</h3>
                 </div>
                 <div class="w-full relative flex flex-col items-center">
@@ -420,11 +404,7 @@
 
                   <!-- Dropdown with Tailwind styles -->
                   <select id="input-select-ringType"
-                    class="w-full border border-blue-700 text-blue-700 py-3 px-4 h-14 rounded-md appearance-none text-lg focus:outline-none focus:ring-2 focus:ring-blue-600 cursor-pointer bg-no-repeat bg-right bg-[length:16px] bg-[url('/assets/images/chevron-down-theme-blue.svg')]"
-                    name="ringType" placeholder="Free Engraving"
-                    aria-labelledby="label-select-ringType-select-an-appointment-type"
-                    aria-describedby="desc-select-ringType-select-an-appointment-type"
-                    style="background-image: url('../public/images/chevron-down-theme-blue.svg'); background-size: 16px; background-repeat: no-repeat; background-position: right 10px center;">
+                    class="w-full border border-blue-700 text-blue-700 py-3 px-4 h-14 rounded-md appearance-none text-lg focus:outline-none focus:ring-2 focus:ring-blue-600 cursor-pointer bg-no-repeat bg-right bg-[length:16px] bg-[url('/assets/images/chevron-down-theme-blue.svg')]">
                     <option value="Engagement Ring">Engagement Ring</option>
                     <option value="Wedding Band">Wedding Band</option>
                   </select>
@@ -464,7 +444,7 @@
                   class="w-full relative flex text-center sm:text-left transition-all transform duration-500 delay-200 ease-in opacity-0 items-center justify-center "
                   style="transform: translate3d(0px, -6px, 0px);">
                   <h3 id="tip-title"
-                    class="text-theme-blue uppercase font-serif text-3xl leading-none sm:text-4/5xl sm:leading-tight pt-6 xl:pt-0 text-3xl md:text-4xl  md:leading-none false">
+                    class="text-theme-blue uppercase font-serif text-3xl leading-none sm:text-4/5xl sm:leading-tight pt-6 xl:pt-0  md:text-4xl  md:leading-none false">
                     Pick Up &amp; Drop Off</h3>
                 </div>
                 <div class="w-full relative flex flex-col items-center">
@@ -619,27 +599,6 @@
       <h3 class="leading-tight 2xl:leading-none text-lg md:text-2xl">Thank you Darling, we’ll be in touch.</h3>
     </div>
   </section>
-
-
-
-
-  <script>
-    document.addEventListener("alpine:init", () => {
-      Alpine.data("scrollHandler", () => ({
-        scrollToTarget() {
-          const urlParams = new URLSearchParams(window.location.search);
-          const scrollTarget = urlParams.get("scroll_target");
-
-          if (scrollTarget === "consultation-form-section") {
-            const targetElement = document.getElementById(scrollTarget);
-            if (targetElement) {
-              targetElement.scrollIntoView({ behavior: "smooth" });
-            }
-          }
-        },
-      }));
-    });
-  </script>
 </body>
 
 </html>
