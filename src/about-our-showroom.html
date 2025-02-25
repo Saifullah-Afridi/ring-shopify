@@ -1,0 +1,645 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./output.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <style>
+    .carousel-root {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slide {
+      flex: 0 0 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="bg-[rgb(28_23_148)] bg-opacity-100 w-full md:flex text-white px-1/12 md:px-0"
+    aria-labelledby="consultation-title">
+    <div class="md:w-1/2 pt-10 md:pt-16 md:pb-12 md:pl-12 lg:pl-28 2xl:px-1/12">
+      <h1 id="consultation-title"
+        class="font-serif text-3xl md:text-2xl leading-tight lg:text-3xl lg:leading-none xl:text-4xl xl:leading-none w-full text-left">
+        GET STARTED ON<br> YOUR DREAM RING</h1>
+      <h2
+        class="text-3xl md:text-2xl leading-tight lg:text-3xl lg:leading-none mt-14 md:mt-4 xl:text-4xl xl:leading-none w-full text-right">
+        BOOK A<br> CONSULTATION <br>WITH A DESIGNER</h2>
+      <p class="mt-14 md:mt-6 lg:mt-11 text-sm">Schedule a virtual or in-person<br> consultation to chat with an expert,
+        view<br> diamonds, and get help designing the<br> perfect ring.</p>
+    </div>
+    <div class="md:w-1/2 pt-10 md:pt-20 relative flex justify-center">
+      <div class="md:absolute bottom-0 md:px-14 text-center"><img class="h-full" src="../public/images/talking.svg"
+          alt="Illustration of a jewelry consultant discussing ring designs with a client, showcasing the personalized consultation experience at Frank Darling"
+          role="img"></div>
+    </div>
+  </section>
+  <section aria-label="Features" class="w-full">
+    <div class="hidden md:flex w-full justify-between divide-x divide-theme-blue">
+      <article class="flex-1 flex flex-col items-center w-full md:w-vw-1/3 text-theme-blue"
+        aria-labelledby="feature-title-chat-with-our-experts">
+        <div class="h-[400px] md:h-[500px] w-vw-full md:w-vw-1/3">
+          <img src="../public/images/chat-with-an-expert.webp" class="w-screen h-full object-cover"
+            alt="Illustration showing chat with our experts - Enjoy a complimentary, personalized appointment with our diamond experts."
+            role="img">
+        </div>
+        <div class="py-8 px-2 md:px-4">
+          <h3 id="feature-title-chat-with-our-experts" class="font-serif text-center text-2xl uppercase">Chat with our
+            Experts</h3>
+          <div class="flex flex-col justify-center pt-4">
+            <p class="max-w-[33ch] text-center font-sans md:text-lg">Enjoy a complimentary, personalized appointment
+              with our diamond experts.</p>
+          </div>
+        </div>
+      </article>
+      <article class="flex-1 flex flex-col items-center w-full md:w-vw-1/3 text-theme-blue"
+        aria-labelledby="feature-title-learn-about-diamonds">
+        <div class="h-[300px] md:h-[500px] w-vw-full md:w-vw-1/3">
+          <img src="../public/images/learn-about-diamonds.webp" class="w-screen h-full object-cover"
+            alt="Illustration showing learn about diamonds - Compare natural and lab grown diamonds, the 4C’s and more."
+            role="img">
+        </div>
+        <div class="py-8 px-2 md:px-4">
+          <h3 id="feature-title-learn-about-diamonds" class="font-serif text-center text-2xl uppercase">Learn about
+            diamonds</h3>
+          <div class="flex flex-col justify-center pt-4">
+            <p class="max-w-[33ch] text-center font-sans md:text-lg">Compare natural and lab grown diamonds, the 4C’s
+              and more.</p>
+          </div>
+        </div>
+      </article>
+      <article class="flex-1 flex flex-col items-center w-full md:w-vw-1/3 text-theme-blue"
+        aria-labelledby="feature-title-design-your-dream-ring">
+        <div class="h-[300px] md:h-[500px] w-vw-full md:w-vw-1/3">
+          <img src="../public/images/design-your-dream-ring.webp" class="w-screen h-full object-cover"
+            alt="Illustration showing design your dream ring - Compare settings, chat with a designer, and customize your dream ring for free."
+            role="img">
+        </div>
+        <div class="py-8 px-2 md:px-4">
+          <h3 id="feature-title-design-your-dream-ring" class="font-serif text-center text-2xl uppercase">Design your
+            dream ring</h3>
+          <div class="flex flex-col justify-center pt-4">
+            <p class="max-w-[33ch] text-center font-sans md:text-lg">Compare settings, chat with a designer, and
+              customize your dream ring for free.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="flex md:hidden">
+      <div class="carousel-root flex items-center w-full h-full how-it-works mb-8">
+        <div class="carousel carousel-slider" style="width: 100%;">
+          <ul class="control-dots">
+            <li class="inline-block h-2.5 w-2.5 rounded-full bg-theme-blue border-white mx-1.5"
+              aria-label="Selected: slide item 1" title="Selected: slide item 1"></li>
+            <li class="inline-block h-2.5 w-2.5 rounded-full bg-gray-300 border border-white mx-1.5" value="1"
+              role="button" tabindex="0" title="slide item 2" aria-label="slide item 2"></li>
+            <li class="inline-block h-2.5 w-2.5 rounded-full bg-gray-300 border border-white mx-1.5" value="2"
+              role="button" tabindex="0" title="slide item 3" aria-label="slide item 3"></li>
+          </ul>
+          <button type="button" aria-label="previous slide / item"
+            class="control-arrow control-prev control-disabled"></button>
+          <div class="slider-wrapper axis-horizontal">
+            <ul class="slider animated" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+              <li class="slide selected previous">
+                <article class="flex-1 flex flex-col items-center w-full md:w-vw-1/3 text-theme-blue"
+                  aria-labelledby="feature-title-chat-with-our-experts">
+                  <div class="h-[250px] w-vw-full md:w-vw-1/3">
+                    <img src="/assets/images/consultation/chat-with-an-expert.webp" class="w-screen h-full object-cover"
+                      alt="Illustration showing chat with our experts - Enjoy a complimentary, personalized appointment  with our diamond experts."
+                      role="img">
+                  </div>
+                  <div class="py-8 px-2 md:px-4">
+                    <h3 id="feature-title-chat-with-our-experts" class="font-serif text-center text-2xl uppercase">Chat
+                      with our Experts</h3>
+                    <div class="flex flex-col justify-center pt-4">
+                      <p class="max-w-[33ch] text-center font-sans md:text-lg">Enjoy a complimentary, personalized
+                        appointment with our diamond experts.</p>
+                    </div>
+                  </div>
+                </article>
+              </li>
+              <li class="slide">
+                <article class="flex-1 flex flex-col items-center w-full md:w-vw-1/3 text-theme-blue"
+                  aria-labelledby="feature-title-learn-about-diamonds">
+                  <div class="h-[250px] w-vw-full md:w-vw-1/3">
+                    <img src="/assets/images/consultation/learn-about-diamonds.webp"
+                      class="w-screen h-full object-cover"
+                      alt="Illustration showing learn about diamonds - Compare natural and lab grown diamonds, the 4C’s and more."
+                      role="img">
+                  </div>
+                  <div class="py-8 px-2 md:px-4">
+                    <h3 id="feature-title-learn-about-diamonds" class="font-serif text-center text-2xl uppercase">Learn
+                      about diamonds</h3>
+                    <div class="flex flex-col justify-center pt-4">
+                      <p class="max-w-[33ch] text-center font-sans md:text-lg">Compare natural and lab grown diamonds,
+                        the 4C’s and more.</p>
+                    </div>
+                  </div>
+                </article>
+              </li>
+              <li class="slide">
+                <article class="flex-1 flex flex-col items-center w-full md:w-vw-1/3 text-theme-blue"
+                  aria-labelledby="feature-title-design-your-dream-ring">
+                  <div class="h-[250px] w-vw-full md:w-vw-1/3">
+                    <img src="/assets/images/consultation/design-your-dream-ring.webp"
+                      class="w-screen h-full object-cover"
+                      alt="Illustration showing design your dream ring - Compare settings, chat with a designer, and customize your dream ring for free."
+                      role="img">
+                  </div>
+                  <div class="py-8 px-2 md:px-4">
+                    <h3 id="feature-title-design-your-dream-ring" class="font-serif text-center text-2xl uppercase">
+                      Design your dream ring</h3>
+                    <div class="flex flex-col justify-center pt-4">
+                      <p class="max-w-[33ch] text-center font-sans md:text-lg">Compare settings, chat with a designer,
+                        and customize your dream ring for free.</p>
+                    </div>
+                  </div>
+                </article>
+              </li>
+            </ul>
+          </div>
+          <button type="button" aria-label="next slide / item"
+            class="control-arrow control-next control-disabled"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div id="consultation-form-section" class="w-full">
+    <h4 class="bg-[rgb(3,0,86)] bg-opacity-100 py-7 text-white text-center font-serif leading-tight text-2xl uppercase">
+      BOOK A CONSULTATION
+    </h4>
+    <div class="divide-y divide-theme-blue">
+      <div class=" text-theme-blue md:hidden divide-y divide-theme-blue">
+        <div class="px-1/12 py-7"><a>
+            <div class="flex justify-between">
+              <h3 class="font-serif uppercase text-xl">In Person</h3><img
+                src="/assets/images/consultation/arrow-down.svg" alt="arrow-down">
+            </div>
+          </a></div>
+        <div class="px-1/12 py-7"><a>
+            <div class="flex justify-between">
+              <h3 class="font-serif uppercase text-xl">Virtual</h3><img src="/assets/images/consultation/arrow-down.svg"
+                alt="arrow-down">
+            </div>
+          </a></div>
+        <div class="px-1/12 py-7"><a>
+            <div class="flex justify-between">
+              <h3 class="font-serif uppercase text-xl">Client Services</h3><img
+                src="/assets/images/consultation/arrow-down.svg" alt="arrow-down">
+            </div>
+          </a></div>
+      </div>
+      <div class="md:flex flex-wrap">
+        <div
+          class="w-screen fixed top-0 left-0 right-0 bottom-0 z-[60] flex items-center justify-center transform transition-all duration-500 delay-100 ease-in bg-[#110F3D] bg-opacity-60 h-[calc(100dvh)] opacity-0 pointer-events-none scale-105"
+          role="dialog" aria-modal="true" aria-label="Put a ring on it" aria-labelledby="tip-title"
+          aria-describedby="tip-description">
+          <div class="w-full relative">
+            <div class="grid grid-cols-24 gap-x-0 relative px-0">
+              <article
+                class="col-span-22 relative col-start-2 flex flex-col items-center justify-center p-6 md:p-5 bg-white md:col-span-12 md:col-start-7 lg:col-span-10 lg:col-start-8 border-[1.5px] border-theme-blue min-h-[60vw] sm:min-h-[22vw]">
+                <div class="w-12 h-12 absolute top-0 right-0 z-20"><button type="button"
+                    class="w-12 h-12 relative block pointer-events-none" aria-label="Close Put a ring on it dialog">
+                    <div class="w-12 h-12 relative flex items-center justify-center p-2"><svg
+                        class="w-12 h-12 relative block fill-current text-theme-blue" viewBox="0 0 39 39" fill="none">
+                        <rect x="10.6074" y="8.48535" width="27" height="3" transform="rotate(45 10.6074 8.48535)">
+                        </rect>
+                        <rect x="29.6992" y="10.6064" width="27" height="3" transform="rotate(135 29.6992 10.6064)">
+                        </rect>
+                      </svg></div>
+                  </button></div>
+                <div
+                  class="w-full relative flex text-center sm:text-left transition-all transform duration-500 delay-200 ease-in opacity-0 items-center justify-center "
+                  style="transform: translate3d(0px, -6px, 0px);">
+                  <h3 id="tip-title"
+                    class="text-theme-blue uppercase font-serif text-3xl leading-none sm:text-4/5xl sm:leading-tight pt-6 xl:pt-0 text-3xl md:text-4xl  md:leading-none false">
+                    Put a ring on it</h3>
+                </div>
+                <div class="w-full relative flex flex-col items-center">
+                  <div id="tip-description"
+                    class="relative text-theme-blue text-center transition-all transform duration-500 ease-in text-lg sm:w-7/12 leading-6 lg:w-1/2 opacity-0 delay-100 pointer-events-none mt-6 md:mt-7 pb-6 xl:pb-0"
+                    style="transform: translate3d(0px, 12px, 0px);">Try on settings and get matched with a curated
+                    flight of stones with an in-person consultation.</div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div
+          class="px-1/12 md:w-1/2 py-12 md:py-16 md:px-12 lg:px-28 2xl:px-1/12 text-theme-blue border-theme-blue border-b md:border-r">
+          <div name="in-person" class="element">
+            <div>
+              <h2
+                class="font-serif uppercase text-3xl md:text-2xl leading-tight lg:text-3xl lg:leading-none xl:text-4xl xl:leading-none">
+                In Person</h2>
+              <p class="md:text-lg mt-4">Book a private consultation to try on settings and view a curated flight of
+                diamonds that are carefully selected to match your search.</p>
+            </div>
+            <div class="md:w-3/4 xl:w-1/2 mt-12 md:mt-16">
+              <form action="#" class="space-y-6 bg-white p-6 rounded-lg w-full max-w-md">
+
+                <!-- Appointment Type Selection -->
+                <div class="flex flex-col">
+                  <label class="text-blue-700 text-xs mb-2" for="appointment-type">
+                    Select an Appointment Type
+                  </label>
+                  <div class="relative">
+                    <select id="appointment-type"
+                      class="w-full border border-blue-700 text-blue-700 py-4 px-4 h-14 rounded-md appearance-none text-lg focus:outline-none focus:ring-2 focus:ring-blue-600 cursor-pointer">
+                      <option value="Engagement Ring">Engagement Ring</option>
+                      <option value="Wedding Band">Wedding Band</option>
+                      <option value="Just Browsing">Just Browsing</option>
+                      <option value="Fine Jewelry">Fine Jewelry</option>
+                    </select>
+                    <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-700 pointer-events-none">
+                      ▼
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Location Selection -->
+                <div class="flex flex-col">
+                  <label class="text-blue-700 text-xs mb-2" for="location">
+                    Select a Location
+                  </label>
+                  <div class="relative">
+                    <select id="location"
+                      class="w-full border border-blue-700 text-blue-700 py-4 px-4 h-14 rounded-md appearance-none text-lg focus:outline-none focus:ring-2 focus:ring-blue-600 cursor-pointer">
+                      <option value="NYC Tribeca">NYC Tribeca</option>
+                      <option value="San Francisco">San Francisco</option>
+                      <option value="Washington DC">Washington DC</option>
+                      <option value="Chicago">Chicago</option>
+                      <option value="Los Angeles">Los Angeles</option>
+                      <option value="Boston">Boston</option>
+                      <option value="Brooklyn">Brooklyn</option>
+                    </select>
+                    <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-700 pointer-events-none">
+                      ▼
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                  class="w-full bg-blue-900 text-white py-3 rounded-md text-lg hover:bg-white hover:text-blue-900 border border-blue-900 uppercase transition cursor-pointer">
+                  SELECT DATE
+                </button>
+
+              </form>
+            </div>
+            <div class="mt-12 md:mt-16">
+              <h3 class="font-serif text-lg">Available Locations</h3>
+              <div class="md:grid md:grid-cols-2 2xl:grid-cols-4 md:gap-3">
+                <div class="mt-2">
+                  <h4 class="text-lg whitespace-nowrap">NYC Tribeca</h4>
+                  <p class="mt-1 text-sm">50 Hudson Street, Floor 3 <br>New York, NY 10013</p><a
+                    href="https://goo.gl/maps/8eVRkXuCYagcV1vA7" target="_black" class="flex mt-1 w-fit"><span
+                      class="text-sm">MAP</span><img src="../public/images/uparrow.svg" class="mx-1 object-contain"
+                      alt="arrow"></a>
+                </div>
+                <div class="mt-2">
+                  <h4 class="text-lg whitespace-nowrap">San Francisco</h4>
+                  <p class="mt-1 text-sm">1136 Clement St <br>San Francisco, CA 94118</p><a
+                    href="https://goo.gl/maps/J3m8es85KzGSih6N8" target="_black" class="flex mt-1 w-fit"><span
+                      class="text-sm">MAP</span><img src="../public/images/uparrow.svg" class="mx-1 object-contain"
+                      alt="arrow"></a>
+                </div>
+                <div class="mt-2">
+                  <h4 class="text-lg whitespace-nowrap">Washington DC</h4>
+                  <p class="mt-1 text-sm">1305 Wisconsin Ave NW, 2A <br>Washington DC, 20007</p><a
+                    href="https://goo.gl/maps/hGkXRVT1kHQAsenR8" target="_black" class="flex mt-1 w-fit"><span
+                      class="text-sm">MAP</span><img src="../public/images/uparrow.svg" class="mx-1 object-contain"
+                      alt="arrow"></a>
+                </div>
+                <div class="mt-2">
+                  <h4 class="text-lg whitespace-nowrap">Chicago</h4>
+                  <p class="mt-1 text-sm">100 W Kinzie St, Suite # 275 <br>Chicago, IL 60654</p><a
+                    href="https://maps.app.goo.gl/ezbtxsuocEMGouRs7" target="_black" class="flex mt-1 w-fit"><span
+                      class="text-sm">MAP</span><img src="../public/images/uparrow.svg" class="mx-1 object-contain"
+                      alt="arrow"></a>
+                </div>
+                <div class="mt-2">
+                  <h4 class="text-lg whitespace-nowrap">Los Angeles</h4>
+                  <p class="mt-1 text-sm">6817 Melrose Ave <br>Los Angeles, CA 90038</p><a
+                    href="https://maps.app.goo.gl/egX7tszNsRhujmpH7" target="_black" class="flex mt-1 w-fit"><span
+                      class="text-sm">MAP</span><img src="../public/images/uparrow.svg" class="mx-1 object-contain"
+                      alt="arrow"></a>
+                </div>
+                <div class="mt-2">
+                  <h4 class="text-lg whitespace-nowrap">Brooklyn</h4>
+                  <p class="mt-1 text-sm">109 N 12th St Suite 605 <br>Brooklyn, NY 11249</p><a
+                    href="https://maps.app.goo.gl/XcaYXPAMs4EHSV5x9" target="_black" class="flex mt-1 w-fit"><span
+                      class="text-sm">MAP</span><img src="../public/images/uparrow.svg" class="mx-1 object-contain"
+                      alt="arrow"></a>
+                </div>
+                <div class="mt-2">
+                  <h4 class="text-lg whitespace-nowrap">Boston</h4>
+                  <p class="mt-1 text-sm">66 Beacon St<br>Suite 201 <br>Boston, MA 02108</p><a
+                    href="https://maps.app.goo.gl/5yjy5ahsNPaPL4jL8" target="_black" class="flex mt-1 w-fit"><span
+                      class="text-sm">MAP</span><img src="../public/images/uparrow.svg" class="mx-1 object-contain"
+                      alt="arrow"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-screen fixed top-0 left-0 right-0 bottom-0 z-[60] flex items-center justify-center transform transition-all duration-500 delay-100 ease-in bg-[#110F3D] bg-opacity-60 h-[calc(100dvh)] opacity-0 pointer-events-none scale-105"
+          role="dialog" aria-modal="true" aria-label="E-meet your e-ring" aria-labelledby="tip-title"
+          aria-describedby="tip-description">
+          <div class="w-full relative">
+            <div class="grid grid-cols-24 gap-x-0 relative px-0">
+              <article
+                class="col-span-22 relative col-start-2 flex flex-col items-center justify-center p-6 md:p-5 bg-white md:col-span-12 md:col-start-7 lg:col-span-10 lg:col-start-8 border-[1.5px] border-theme-blue min-h-[60vw] sm:min-h-[22vw]">
+                <div class="w-12 h-12 absolute top-0 right-0 z-20"><button type="button"
+                    class="w-12 h-12 relative block pointer-events-none" aria-label="Close E-meet your e-ring dialog">
+                    <div class="w-12 h-12 relative flex items-center justify-center p-2"><svg
+                        class="w-12 h-12 relative block fill-current text-theme-blue" viewBox="0 0 39 39" fill="none">
+                        <rect x="10.6074" y="8.48535" width="27" height="3" transform="rotate(45 10.6074 8.48535)">
+                        </rect>
+                        <rect x="29.6992" y="10.6064" width="27" height="3" transform="rotate(135 29.6992 10.6064)">
+                        </rect>
+                      </svg></div>
+                  </button></div>
+                <div
+                  class="w-full relative flex text-center sm:text-left transition-all transform duration-500 delay-200 ease-in opacity-0 items-center justify-center "
+                  style="transform: translate3d(0px, -6px, 0px);">
+                  <h3 id="tip-title"
+                    class="text-theme-blue uppercase font-serif text-3xl leading-none sm:text-4/5xl sm:leading-tight pt-6 xl:pt-0 text-3xl md:text-4xl  md:leading-none false">
+                    E-meet your e-ring</h3>
+                </div>
+                <div class="w-full relative flex flex-col items-center">
+                  <div id="tip-description"
+                    class="relative text-theme-blue text-center transition-all transform duration-500 ease-in text-lg sm:w-7/12 leading-6 lg:w-1/2 opacity-0 delay-100 pointer-events-none mt-6 md:mt-7 pb-6 xl:pb-0"
+                    style="transform: translate3d(0px, 12px, 0px);">Chat virtually with our diamond experts to find the
+                    engagement ring of your dreams.</div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div
+          class="px-1/12 md:w-1/2 py-12 md:py-16 md:px-12 lg:px-28 2xl:px-1/12 text-theme-blue border-theme-blue border-b">
+          <div name="virtual" class="element">
+            <div>
+              <h2
+                class="font-serif uppercase text-3xl md:text-2xl leading-tight lg:text-3xl lg:leading-none xl:text-4xl xl:leading-none">
+                Virtual</h2>
+              <p class="md:text-lg mt-4">Schedule a virtual consultation with a designer to discuss your idea for your
+                dream ring. You’ll get expert advice on ring design, gemstone selection, and answers to any questions
+                you have.</p>
+            </div>
+            <div class="md:w-3/4 xl:w-1/2 mt-12 md:mt-16">
+              <form action="#" class="space-y-6">
+                <div class="flex flex-col items-start" role="group" aria-labelledby="label-select-ringType">
+                  <div class="flex justify-between w-full">
+                    <label id="label-select-ringType"
+                      class="font-sans text-theme-blue text-xs leading-none tracking-tight mb-2 flex items-center gap-1"
+                      for="input-select-ringType">
+                      Select an Appointment Type
+                      <span class="ml-1" aria-hidden="true">
+                        <button type="button">
+                          <svg class="w-4 rounded-full" viewBox="0 0 12 12" fill="none">
+                            <path
+                              d="M6.00033 0.166626C2.78033 0.166626 0.166992 2.77996 0.166992 5.99996C0.166992 9.21996 2.78033 11.8333 6.00033 11.8333C9.22033 11.8333 11.8337 9.21996 11.8337 5.99996C11.8337 2.77996 9.22033 0.166626 6.00033 0.166626ZM6.58366 10.0833H5.41699V8.91663H6.58366V10.0833ZM7.79116 5.56246L7.26616 6.09913C6.84616 6.52496 6.58366 6.87496 6.58366 7.74996H5.41699V7.45829C5.41699 6.81663 5.67949 6.23329 6.09949 5.80746L6.82283 5.07246C7.03866 4.86246 7.16699 4.57079 7.16699 4.24996C7.16699 3.60829 6.64199 3.08329 6.00033 3.08329C5.35866 3.08329 4.83366 3.60829 4.83366 4.24996H3.66699C3.66699 2.96079 4.71116 1.91663 6.00033 1.91663C7.28949 1.91663 8.33366 2.96079 8.33366 4.24996C8.33366 4.76329 8.12366 5.22996 7.79116 5.56246Z"
+                              fill="#030056"></path>
+                          </svg>
+                        </button>
+                      </span>
+                    </label>
+                  </div>
+
+                  <!-- Dropdown with Tailwind styles -->
+                  <select id="input-select-ringType"
+                    class="w-full border border-blue-700 text-blue-700 py-3 px-4 h-14 rounded-md appearance-none text-lg focus:outline-none focus:ring-2 focus:ring-blue-600 cursor-pointer bg-no-repeat bg-right bg-[length:16px] bg-[url('/assets/images/chevron-down-theme-blue.svg')]"
+                    name="ringType" placeholder="Free Engraving"
+                    aria-labelledby="label-select-ringType-select-an-appointment-type"
+                    aria-describedby="desc-select-ringType-select-an-appointment-type"
+                    style="background-image: url('../public/images/chevron-down-theme-blue.svg'); background-size: 16px; background-repeat: no-repeat; background-position: right 10px center;">
+                    <option value="Engagement Ring">Engagement Ring</option>
+                    <option value="Wedding Band">Wedding Band</option>
+                  </select>
+
+                  <div id="desc-select-ringType" class="sr-only">Free Engraving</div>
+                </div>
+
+                <button
+                  class="w-full border h-12 xl:h-16 bg-dark-blue text-white hover:bg-white hover:text-dark-blue hover:border-dark-blue uppercase">
+                  SELECT DATE
+                </button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-screen fixed top-0 left-0 right-0 bottom-0 z-[60] flex items-center justify-center transform transition-all duration-500 delay-100 ease-in bg-[#110F3D] bg-opacity-60 h-[calc(100dvh)] opacity-0 pointer-events-none scale-105"
+          role="dialog" aria-modal="true" aria-label="Pick Up &amp; Drop Off" aria-labelledby="tip-title"
+          aria-describedby="tip-description">
+          <div class="w-full relative">
+            <div class="grid grid-cols-24 gap-x-0 relative px-0">
+              <article
+                class="col-span-22 relative col-start-2 flex flex-col items-center justify-center p-6 md:p-5 bg-white md:col-span-12 md:col-start-7 lg:col-span-10 lg:col-start-8 border-[1.5px] border-theme-blue min-h-[60vw] sm:min-h-[22vw]">
+                <div class="w-12 h-12 absolute top-0 right-0 z-20"><button type="button"
+                    class="w-12 h-12 relative block pointer-events-none"
+                    aria-label="Close Pick Up &amp; Drop Off dialog">
+                    <div class="w-12 h-12 relative flex items-center justify-center p-2"><svg
+                        class="w-12 h-12 relative block fill-current text-theme-blue" viewBox="0 0 39 39" fill="none">
+                        <rect x="10.6074" y="8.48535" width="27" height="3" transform="rotate(45 10.6074 8.48535)">
+                        </rect>
+                        <rect x="29.6992" y="10.6064" width="27" height="3" transform="rotate(135 29.6992 10.6064)">
+                        </rect>
+                      </svg></div>
+                  </button></div>
+                <div
+                  class="w-full relative flex text-center sm:text-left transition-all transform duration-500 delay-200 ease-in opacity-0 items-center justify-center "
+                  style="transform: translate3d(0px, -6px, 0px);">
+                  <h3 id="tip-title"
+                    class="text-theme-blue uppercase font-serif text-3xl leading-none sm:text-4/5xl sm:leading-tight pt-6 xl:pt-0 text-3xl md:text-4xl  md:leading-none false">
+                    Pick Up &amp; Drop Off</h3>
+                </div>
+                <div class="w-full relative flex flex-col items-center">
+                  <div id="tip-description"
+                    class="relative text-theme-blue text-center transition-all transform duration-500 ease-in text-lg sm:w-7/12 leading-6 lg:w-1/2 opacity-0 delay-100 pointer-events-none mt-6 md:mt-7 pb-6 xl:pb-0"
+                    style="transform: translate3d(0px, 12px, 0px);">Schedule an in-person pick-up or drop-off at your FD
+                    studio today, relax tomorrow. </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div class="px-1/12 md:w-1/2 py-12 md:py-16 md:px-12 lg:px-28 2xl:px-1/12 text-theme-blue border-theme-blue">
+          <div name="client-services" class="element">
+            <div>
+              <h2
+                class="font-serif uppercase text-3xl md:text-2xl leading-tight lg:text-3xl lg:leading-none xl:text-4xl xl:leading-none">
+                Client Services</h2>
+              <p class="md:text-lg mt-4">If you're making an appointment to pick up your ring or drop it off for
+                post-purchase care, you can schedule an appointment.</p>
+            </div>
+            <div class="md:w-3/4 xl:w-1/2 mt-12 md:mt-16">
+              <form action="#" class="space-y-6">
+                <div class="flex flex-col items-start" role="group"
+                  aria-labelledby="label-select-ringType-select-an-appointment-type">
+                  <div class="flex flex-row justify-between w-full"><label
+                      id="label-select-ringType-select-an-appointment-type"
+                      class="font-sans text-theme-blue text-xs leading-none tracking-tight mb-2 flex items-center gap-1"
+                      for="input-select-ringType-select-an-appointment-type">Select an Appointment Type<span
+                        class="ml-1" aria-hidden="true"><button type="button"><svg class="w-4 rounded-full "
+                            viewBox="0 0 12 12" fill="none">
+                            <path
+                              d="M6.00033 0.166626C2.78033 0.166626 0.166992 2.77996 0.166992 5.99996C0.166992 9.21996 2.78033 11.8333 6.00033 11.8333C9.22033 11.8333 11.8337 9.21996 11.8337 5.99996C11.8337 2.77996 9.22033 0.166626 6.00033 0.166626ZM6.58366 10.0833H5.41699V8.91663H6.58366V10.0833ZM7.79116 5.56246L7.26616 6.09913C6.84616 6.52496 6.58366 6.87496 6.58366 7.74996H5.41699V7.45829C5.41699 6.81663 5.67949 6.23329 6.09949 5.80746L6.82283 5.07246C7.03866 4.86246 7.16699 4.57079 7.16699 4.24996C7.16699 3.60829 6.64199 3.08329 6.00033 3.08329C5.35866 3.08329 4.83366 3.60829 4.83366 4.24996H3.66699C3.66699 2.96079 4.71116 1.91663 6.00033 1.91663C7.28949 1.91663 8.33366 2.96079 8.33366 4.24996C8.33366 4.76329 8.12366 5.22996 7.79116 5.56246Z"
+                              fill="#030056"></path>
+                          </svg></button></span></label></div><select
+                    id="input-select-ringType-select-an-appointment-type"
+                    class="w-full border border-blue-700 text-blue-700 py-3 px-4 h-14 rounded-md appearance-none text-lg focus:outline-none focus:ring-2 focus:ring-blue-600 cursor-pointer bg-no-repeat bg-right bg-[length:16px] bg-[url('/assets/images/chevron-down-theme-blue.svg')]"
+                    name="ringType" placeholder="Free Engraving"
+                    aria-labelledby="label-select-ringType-select-an-appointment-type"
+                    aria-describedby="desc-select-ringType-select-an-appointment-type"
+                    style="background-image: url('../public/images/chevron-down-theme-blue.svg'); background-size: 16px; background-repeat: no-repeat; background-position: right 10px center;">
+                    <option value="Pick Up &amp; Drop Off" aria-label="Pick Up &amp; Drop Off">Pick Up &amp; Drop Off
+                    </option>
+                    <option value="Ring Resizing" aria-label="Ring Resizing">Ring Resizing</option>
+                  </select>
+                  <div id="desc-select-ringType-select-an-appointment-type" class="sr-only">Free Engraving</div>
+                </div>
+                <div class="flex flex-col items-start" role="group"
+                  aria-labelledby="label-select-location-select-a-location">
+                  <div class="flex flex-row justify-between w-full"><label id="label-select-location-select-a-location"
+                      class="font-sans text-theme-blue text-xs leading-none tracking-tight mb-2 flex items-center gap-1"
+                      for="input-select-location-select-a-location">Select a Location</label></div><select
+                    id="input-select-location-select-a-location"
+                    class="w-full border border-blue-700 text-blue-700 py-3 px-4 h-14 rounded-md appearance-none text-lg focus:outline-none focus:ring-2 focus:ring-blue-600 cursor-pointer bg-no-repeat bg-right bg-[length:16px] bg-[url('/assets/images/chevron-down-theme-blue.svg')]"
+                    name=" location" placeholder="Free Engraving"
+                    aria-labelledby="label-select-location-select-a-location"
+                    aria-describedby="desc-select-location-select-a-location"
+                    style="background-image: url('../public/images/chevron-down-theme-blue.svg'); background-size: 16px; background-repeat: no-repeat; background-position: right 10px center;">
+                    <option value="NYC Tribeca" aria-label="NYC Tribeca">NYC Tribeca</option>
+                    <option value="San Francisco" aria-label="San Francisco">San Francisco</option>
+                    <option value="Washington DC" aria-label="Washington DC">Washington DC</option>
+                    <option value="Chicago" aria-label="Chicago">Chicago</option>
+                    <option value="Los Angeles" aria-label="Los Angeles">Los Angeles</option>
+                    <option value="Boston" aria-label="Boston">Boston</option>
+                    <option value="Brooklyn" aria-label="Brooklyn">Brooklyn</option>
+                  </select>
+                  <div id="desc-select-location-select-a-location" class="sr-only">Free Engraving</div>
+                </div><button
+                  class="w-full border h-12 xl:h-16 bg-[rgb(3,0,86)] text-white hover:bg-white hover:text-[rgb(3,0,86)] hover:border-bg-[rgb(3,0,86)] uppercase">SELECT
+                  DATE</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="pl-1/12 md:pl-0 md:w-1/2 mb-12 md:mb-0 flex justify-end md:pr-12 lg:pr-28 2xl:pr-1/12">
+          <div class="h-3/4 w-full sm:w-2/3 md:w-auto"><img src="../public/images/ring-in-hand.svg" class="w-full"
+              alt="ring-in-hand"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-[rgb(3,0,86)] w-full divide-y">
+    <h2 class="py-7 text-white text-center font-serif uppercase leading-tight text-2xl">OUR VALUES</h2>
+    <div class="h-full flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x">
+      <div
+        class="min-h-full flex-1 flex flex-col justify-between items-center text-white px-8 md:px-6 xl:px-14 py-8 md:py-10"
+        role="article" aria-labelledby="value-heading">
+        <h4 id="value-heading" class="font-serif text-center text-2xl uppercase md:h-24 lg:h-auto">LAB GROWN
+          AND<br>NATURAL DIAMONDS</h4>
+        <div class="h-28 md:h-48 my-8 md:my-10"><img src="../public/images/1.svg"
+            alt="LAB GROWN AND NATURAL DIAMONDS - Learn the pros and cons of each diamond type and compare them side by side."
+            class="h-full object-contain" role="img"></div>
+        <div class="flex flex-col justify-center">
+          <p class="max-w-[33ch] md:max-w-none 2xl:max-w-[33ch] text-center font-sans md:text-lg">Learn the pros and
+            cons of each diamond type and compare them side by side.</p>
+        </div>
+      </div>
+      <div
+        class="min-h-full flex-1 flex flex-col justify-between items-center text-white px-8 md:px-6 xl:px-14 py-8 md:py-10"
+        role="article" aria-labelledby="value-heading">
+        <h4 id="value-heading" class="font-serif text-center text-2xl uppercase md:h-24 lg:h-auto">HANDMADE IN NYC
+          FROM<br>RECYCLED METALS</h4>
+        <div class="h-28 md:h-48 my-8 md:my-10"><img src="../public/images/tree.svg"
+            alt="HANDMADE IN NYC FROM RECYCLED METALS - All materials used in your ring are ethically sourced, sustainable or recycled."
+            class="h-full object-contain" role="img"></div>
+        <div class="flex flex-col justify-center">
+          <p class="max-w-[33ch] md:max-w-none 2xl:max-w-[33ch] text-center font-sans md:text-lg">All materials used in
+            your ring are ethically sourced, sustainable or recycled.</p>
+        </div>
+      </div>
+      <div
+        class="min-h-full flex-1 flex flex-col justify-between items-center text-white px-8 md:px-6 xl:px-14 py-8 md:py-10"
+        role="article" aria-labelledby="value-heading">
+        <h4 id="value-heading" class="font-serif text-center text-2xl uppercase md:h-24 lg:h-auto">
+          COMPLETELY<br>Customizable</h4>
+        <div class="h-28 md:h-48 my-8 md:my-10"><img src="../public/images/mirror-lady.svg"
+            alt="COMPLETELY Customizable - Custom design is complimentary, sketches and prototypes help you make all the decisions."
+            class="h-full object-contain" role="img"></div>
+        <div class="flex flex-col justify-center">
+          <p class="max-w-[33ch] md:max-w-none 2xl:max-w-[33ch] text-center font-sans md:text-lg">Custom design is
+            complimentary, sketches and prototypes help you make all the decisions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <section id="newsletter"
+    class="pb-12 flex flex-col border-t border-theme-blue text-theme-blue bg-white items-center relative">
+    <div class="w-5/6 xl:w-full max-w-3xl 3xl:max-w-4xl 4xl:max-w-6xl flex flex-col justify-center py-8">
+      <h2 class="leading-tight 2xl:leading-none text-lg md:text-2xl 3xl:text-3xl 4xl:text-4/5xl font-serif uppercase">In
+        love? Darling, you need all the help<br class="hidden md:block"> you can get.</h2>
+      <h3
+        class="xl:-mt-8 2xl:-mt-6 3xl:-mt-10 text-lg md:text-2xl 3xl:text-3xl 4xl:text-4/5xl leading-tight 2xl:leading-none font-sans text-right uppercase">
+        Sign up for practical advice on the<br class="hidden md:block"> irrational matters of the heart.</h3>
+    </div>
+    <div class="w-5/6 xl:w-full max-w-3xl 3xl:max-w-4xl 4xl:max-w-6xl">
+      <form>
+        <div class="flex relative opacity-100"><input type="email" name="email" placeholder="enter your email"
+            class="flex-1 disabled:bg-gray-300 appearance-none placeholder-theme-blue text-theme-blue uppercase pl-3 py-0.5 text-lg 3xl:text-2xl 4xl:text-3xl focus:outline-none focus:ring-0 outline-none md:text-xl h-12 border border-theme-blue focus:border-theme-blue leading-none"
+            value=""><img src="../public/images/arrow.svg" alt="Submit newsletter"
+            class="absolute right-3 w-12 h-12 top-0 z-10 cursor-pointer"></div>
+        <p class="text-xs leading-none mt-3 opacity-0"></p>
+        <p class="text-xs leading-none mt-3 text-theme-blue opacity-100">Frank Darling doesn't spam, and neither should
+          you.</p>
+      </form>
+    </div>
+    <div
+      class="absolute inset-0 bg-white flex flex-col justify-center items-center z-10 font-sans pointer-events-none scale-95 transform duration-300 ease-in-out opacity-0">
+      <h2 class="leading-tight 2xl:leading-none text-lg md:text-2xl uppercase mb-6">Confirmed</h2>
+      <h3 class="leading-tight 2xl:leading-none text-lg md:text-2xl">Thank you Darling, we’ll be in touch.</h3>
+    </div>
+  </section>
+
+
+
+
+  <script>
+    document.addEventListener("alpine:init", () => {
+      Alpine.data("scrollHandler", () => ({
+        scrollToTarget() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const scrollTarget = urlParams.get("scroll_target");
+
+          if (scrollTarget === "consultation-form-section") {
+            const targetElement = document.getElementById(scrollTarget);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        },
+      }));
+    });
+  </script>
+</body>
+
+</html>
