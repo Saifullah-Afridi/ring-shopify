@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link href="./output.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <style>
+    .carousel-root {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slide {
+      flex: 0 0 100%;
+    }
+
+    /* Adjust widths for sections */
+    .left-section {
+      flex: 1;
+      max-width: 60%;
+      /* Adjust as needed */
+    }
+
+    .right-section {
+      flex: 1;
+      max-width: 40%;
+      /* Adjust as needed */
+    }
+
+    @media (max-width: 768px) {
+
+      .left-section,
+      .right-section {
+        max-width: 100%;
+        /* Full width on smaller screens */
+      }
+    }
+  </style>
+</head>
+
+<body class="">
+  <section class="flex flex-col md:flex-row items-start relative transform-gpu">
+    <!-- Left Section (Carousel and Details) -->
+    <section class="left-section flex flex-col relative">
+      <!-- Carousel Section -->
+      <section
+        class="flex relative w-full h-vw-full md:h-vw-2/3 xl:h-vw-2/3 border-l border-r md:border-0 border-theme-blue">
+        <section x-data="{
+          currentSlide: 0,
+          slides: [
+            { type: 'video', poster: 'https://videos.frankdarling.com/rings/7550922883311/YG-1647891628344_thumbnail.0000000.jpeg', safari: 'https://videos.frankdarling.com/rings/7550922883311/YG-1647891628344_safari.mp4', others: 'https://videos.frankdarling.com/rings/7550922883311/YG-1647891628344_others.mp4' },
+            { type: 'video', poster: 'https://videos.frankdarling.com/rings/7550922883311/YGB-1647891632126_thumbnail.0000000.jpeg', safari: 'https://videos.frankdarling.com/rings/7550922883311/YGB-1647891632126_safari.mp4', others: 'https://videos.frankdarling.com/rings/7550922883311/YGB-1647891632126_others.mp4' },
+            { type: 'image', src: 'https://uploads.frankdarling.com/s/files/1/0042/2405/7462/products/yellow-gold-front-view-low-profile-trillion-solitaire-engagement-ring.avif' },
+            { type: 'image', src: 'https://uploads.frankdarling.com/s/files/1/0042/2405/7462/products/yellow-gold-side-view-low-profile-trillion-solitaire-engagement-ring.avif' },
+            { type: 'image', src: 'https://uploads.frankdarling.com/s/files/1/0042/2405/7462/products/yellow-gold-back-view-low-profile-trillion-solitaire-engagement-ring.avif' }
+          ],
+          next() {
+            this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+          },
+          prev() {
+            this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+          }
+          }" class="relative w-full h-full border-l border-r md:border-0 border-theme-blue overflow-hidden">
+          <!-- Slides Container -->
+          <ul class="slider flex transition-transform duration-500 ease-in-out"
+            :style="'transform: translateX(-' + currentSlide * 100 + '%)'">
+            <template x-for="(slide, index) in slides" :key="index">
+              <li class="slide w-full flex-shrink-0">
+                <!-- Video Slide -->
+                <template x-if="slide.type === 'video'">
+                  <div class="w-full h-full bg-cover bg-center" :style="'background-image: url(' + slide.poster + ');'">
+                    <video class="w-full h-full object-cover" autoplay playsinline loop>
+                      <source :src="slide.safari" type='video/mp4; codecs="hev1"' />
+                      <source :src="slide.others" type='video/mp4; codecs="avc1.42E01E"' />
+                    </video>
+                  </div>
+                </template>
+
+                <!-- Image Slide -->
+                <template x-if="slide.type === 'image'">
+                  <img class="w-full h-full object-cover" :src="slide.src" alt="Carousel Image" />
+                </template>
+              </li>
+            </template>
+          </ul>
+
+          <!-- Left Button -->
+          <button @click="prev()"
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 flex items-center w-vw-1/12 z-10 focus:outline-none rotate-180 h-vw-2/3 xl:h-vw-1/2">
+            <img src="../public/images/arrow.svg" alt="Previous" style="width: 50%" />
+          </button>
+
+          <!-- Right Button -->
+          <button @click="next()"
+            class="absolute right-0 top-1/2 transform -translate-y-1/2 flex items-center w-vw-1/12 z-10 focus:outline-none h-vw-2/3 xl:h-vw-1/2">
+            <img src="../public/images/arrow.svg" alt="Next" style="width: 50%" />
+          </button>
+
+          <!-- Indicators -->
+          <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            <template x-for="(slide, index) in slides" :key="index">
+              <button @click="currentSlide = index"
+                class="w-3 h-3 rounded-full border border-white transition-all duration-300"
+                :class="currentSlide === index ? 'bg-white' : 'bg-gray-400'"></button>
+            </template>
+          </div>
+        </section>
+      </section>
+
+      <!-- Ring Details Section -->
+      <div class="flex flex-col border-b border-white md:border-theme-blue">
+        <div
+          class="bg-[rgb(28,23,148)] bg-opacity-100 py-5 px-8 text-white w-full text-2xl font-serif text-center uppercase">
+          YOUR SETTING
+        </div>
+        <div class="flex w-full px-5">
+          <div
+            class="w-full py-vw-4 px-vw-1/12 md:py-vw-2 md:px-vw-4 border-theme-blue border-t flex flex-col relative z-10 justify-center text-theme-blue">
+            <p
+              class="font-serif text-lg 3xl:text-2xl 4xl:text-vw-1 3xl:leading-tight 4xl:leading-normal leading-snug mb-6 text-left">
+              Ring Details</p>
+            <p class="font-serif text-sm 3xl:text-lg 4xl:text-xl -mt-6 mb-6 text-left text-capitalize">Shown with 2
+              carat center stone</p>
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-2">
+              <div
+                class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                <p class="w-1/2 flex items-center z-10"><span class="font-serif">Band Width</span></p>
+                <p class="w-1/2 font-bold z-10 text-right">1.5 mm <span
+                    class="block font-normal md:font-bold md:inline"></span></p>
+              </div>
+              <div
+                class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                <p class="w-1/2 flex items-center z-10"><span class="font-serif">Setting Height</span></p>
+                <p class="w-1/2 font-bold z-10 text-right">7 mm with a 2 carat stone <span
+                    class="block font-normal md:font-bold md:inline"></span></p>
+              </div>
+              <div
+                class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                <p class="w-1/2 flex items-center z-10"><span class="font-serif">Band Height</span></p>
+                <p class="w-1/2 font-bold z-10 text-right">1.7 mm <span
+                    class="block font-normal md:font-bold md:inline"></span></p>
+              </div>
+              <div
+                class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                <p class="w-1/2 flex items-center z-10"><span class="font-serif">Resizing</span></p>
+                <p class="w-1/2 font-bold z-10 text-right">Up to one size larger or smaller <span
+                    class="block font-normal md:font-bold md:inline"></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Section (Sticky Navigation) -->
+    <div class="right-section hidden md:block top-16 lg:top-12 z-20 sticky">
+      <nav
+        class="p-vw-1/12 md:pt-8 md:pb-20 md:px-6 xl:py-16 xl:px-12 text-theme-blue border-t md:border-t-0 md:border-l border-b border-theme-blue w-full flex flex-col overflow-y-scroll h-96 md:h-screen">
+        <!-- Content of the sticky navigation -->
+        <hgroup class="font-serif">
+          <h1
+            class="text-2xl leading-tight xl:text-4/5xl 3xl:text-6xl 3xl:leading-none 4xl:text-8xl xl:leading-none uppercase">
+            The Harper | Cushion</h1>
+          <h4
+            class="mt-10 md:mt-0 mb-3 md:mb-8 xl:my-5 text-lg leading-tight md:text-sm md:leading-8 xl:text-2xl 3xl:text-3xl 4xl:text-4/5xl xl:leading-tight 3xl:leading-none">
+            Flush Stacking Cushion Solitaire</h4>
+        </hgroup>
+        <div
+          class="pt-3  text-[rgb(28,23,148)] text-base 3xl:text-lg 4xl:text-2xl leading-tight 3xl:leading-snug 4xl:leading-tight font-sans">
+          <p>
+            <meta charset="utf-8">If less is more, Harper is the most. Stripped down to bare essentials, this minimal,
+            cushion cut engagement ring keeps the focus on the diamond. Featuring an oh so sparkly cushion cut diamond,
+            four claw prongs, and a thin band to make your rock pop. Thoughtfully designed to stack flush with your
+            wedding ring. It's our most popular solitaire ring for a reason.<br>
+          </p>
+        </div>
+        <div class="md:flex my-3">
+          <div class="flex md:flex-col md:w-1/3 items-center py-2 px-2"><img
+              class="mr-4 w-12 h-12 md:mr-0 2xl:w-16 2xl:h-16 3xl:w-20 3xl:h-20" src="../public/images/stackable.svg"
+              alt="stackable">
+            <h2
+              class="font-serif mt-2 text-xl leading-tight md:text-sm xl:text-2xl 3xl:text-3xl 4xl:text-4/5xl 3xl:leading-none text-center">
+              Stacks Flush</h2>
+          </div>
+          <div class="flex md:flex-col md:w-1/3 items-center py-2 px-2"><img
+              class="mr-4 w-12 h-12 md:mr-0 2xl:w-16 2xl:h-16 3xl:w-20 3xl:h-20" src="../public/images/profile.svg"
+              alt="profile">
+            <h2
+              class="font-serif mt-2 text-xl leading-tight md:text-sm xl:text-2xl 3xl:text-3xl 4xl:text-4/5xl 3xl:leading-none text-center">
+              Medium Profile</h2>
+          </div>
+          <div class="flex md:flex-col md:w-1/3 items-center py-2 px-2"><img
+              class="mr-4 w-12 h-12 md:mr-0 2xl:w-16 2xl:h-16 3xl:w-20 3xl:h-20" src="../public/images/fit.svg"
+              alt="fit">
+            <h2
+              class="font-serif mt-2 text-xl leading-tight md:text-sm xl:text-2xl 3xl:text-3xl 4xl:text-4/5xl 3xl:leading-none text-center">
+              Classic Comfort Fit</h2>
+          </div>
+        </div>
+        <form action="#" class="mt-5 md:mt-6">
+          <div class="mb-5 flex flex-col xl:flex-row justify-center space-y-4 xl:space-y-0 xl:space-x-5">
+            <div class="w-full">
+              <div class="flex flex-col items-start" role="group"
+                aria-labelledby="label-select-bandSelector-band-material">
+                <div class="flex flex-row justify-between w-full"><label id="label-select-bandSelector-band-material"
+                    class="font-sans text-[rgb(28,23,148)] text-xs leading-none tracking-tight mb-2 flex items-center gap-1"
+                    for="input-select-bandSelector-band-material">Band Material</label></div><select
+                  id="input-select-bandSelector-band-material"
+                  class="w-full border[rgb(28,23,148)] ring-1 ring-[rgb(28,23,148)] font-sans text-[rgb(28,23,148)] focus:outline-none focus:ring-0 focus:border-blue-600 py-0 px-3 h-12 appearance-none outline-none focus:border-2 focus:rounded text-lg 3xl:text-2xl 4xl:text-3xl"
+                  name="bandSelector" placeholder="Free Engraving"
+                  aria-labelledby="label-select-bandSelector-band-material"
+                  aria-describedby="desc-select-bandSelector-band-material"
+                  style="background-image: url(&quot;/assets/images/icons/chevron-down-theme-blue.svg&quot;); background-size: 16px;">
+                  <option value="14K Yellow Gold" aria-label="14K Yellow Gold">14K Yellow Gold</option>
+                  <option value="18K Yellow Gold" aria-label="18K Yellow Gold">18K Yellow Gold</option>
+                  <option value="14K White Gold" aria-label="14K White Gold">14K White Gold</option>
+                  <option value="18K White Gold" aria-label="18K White Gold">18K White Gold</option>
+                  <option value="18K Rose Gold" aria-label="18K Rose Gold">18K Rose Gold</option>
+                  <option value="Platinum" aria-label="Platinum">Platinum</option>
+                </select>
+                <div id="desc-select-bandSelector-band-material" class="sr-only">Free Engraving</div>
+              </div>
+            </div>
+            <div class="w-full relative">
+              <div class="flex flex-col items-start" role="group" aria-labelledby="label-select-sizeSelector-ring-size">
+                <div class="flex flex-row justify-between w-full"><label id="label-select-sizeSelector-ring-size"
+                    class="font-sans text-theme-blue text-xs leading-none tracking-tight mb-2 flex items-center gap-1"
+                    for="input-select-sizeSelector-ring-size">Ring Size</label><button type="button"
+                    class="font-sans text-[rgb(28,23,148)] cursor-pointer text-xs leading-none capitalize tracking-tight mb-2 underline"
+                    aria-label="I don't know my size for Ring Size" id="action-select-sizeSelector-ring-size">I don't
+                    know my size</button></div><select id="input-select-sizeSelector-ring-size"
+                  class="w-full border-[rgb(28,23,148)] ring-1 ring-[rgb(28,23,148)] font-sans text-[rgb(28,23,148)] focus:outline-none focus:ring-0 focus:border-blue-600 py-0 px-3 h-12 appearance-none outline-none focus:border-2 focus:rounded text-lg 3xl:text-2xl 4xl:text-3xl"
+                  name="sizeSelector" placeholder="Free Engraving" aria-labelledby="label-select-sizeSelector-ring-size"
+                  aria-describedby="desc-select-sizeSelector-ring-size"
+                  style="background-image: url(&quot;/assets/images/icons/chevron-down-theme-blue.svg&quot;); background-size: 16px;">
+                  <option value="ring_sizer" aria-label="Send ring sizer">Send ring sizer</option>
+                  <option value="3" aria-label="3">3</option>
+                  <option value="3.25" aria-label="3 1/4">3 1/4</option>
+                  <option value="3.5" aria-label="3 1/2">3 1/2</option>
+                  <option value="3.75" aria-label="3 3/4">3 3/4</option>
+                  <option value="4" aria-label="4">4</option>
+                  <option value="4.25" aria-label="4 1/4">4 1/4</option>
+                  <option value="4.5" aria-label="4 1/2">4 1/2</option>
+                  <option value="4.75" aria-label="4 3/4">4 3/4</option>
+                  <option value="5" aria-label="5">5</option>
+                  <option value="5.25" aria-label="5 1/4">5 1/4</option>
+                  <option value="5.5" aria-label="5 1/2">5 1/2</option>
+                  <option value="5.75" aria-label="5 3/4">5 3/4</option>
+                  <option value="6" aria-label="6">6</option>
+                  <option value="6.25" aria-label="6 1/4">6 1/4</option>
+                  <option value="6.5" aria-label="6 1/2">6 1/2</option>
+                  <option value="6.75" aria-label="6 3/4">6 3/4</option>
+                  <option value="7" aria-label="7">7</option>
+                  <option value="7.25" aria-label="7 1/4">7 1/4</option>
+                  <option value="7.5" aria-label="7 1/2">7 1/2</option>
+                  <option value="7.75" aria-label="7 3/4">7 3/4</option>
+                  <option value="8" aria-label="8">8</option>
+                  <option value="8.25" aria-label="8 1/4">8 1/4</option>
+                  <option value="8.5" aria-label="8 1/2">8 1/2</option>
+                  <option value="8.75" aria-label="8 3/4">8 3/4</option>
+                  <option value="9" aria-label="9">9</option>
+                  <option value="9.25" aria-label="9 1/4">9 1/4</option>
+                  <option value="9.5" aria-label="9 1/2">9 1/2</option>
+                  <option value="9.75" aria-label="9 3/4">9 3/4</option>
+                  <option value="10" aria-label="10">10</option>
+                  <option value="10.25" aria-label="10 1/4">10 1/4</option>
+                  <option value="10.5" aria-label="10 1/2">10 1/2</option>
+                  <option value="10.75" aria-label="10 3/4">10 3/4</option>
+                  <option value="11" aria-label="11">11</option>
+                  <option value="11.25" aria-label="11 1/4">11 1/4</option>
+                  <option value="11.5" aria-label="11 1/2">11 1/2</option>
+                  <option value="11.75" aria-label="11 3/4">11 3/4</option>
+                  <option value="12" aria-label="12">12</option>
+                  <option value="12.25" aria-label="12 1/4">12 1/4</option>
+                  <option value="12.5" aria-label="12 1/2">12 1/2</option>
+                  <option value="12.75" aria-label="12 3/4">12 3/4</option>
+                  <option value="13" aria-label="13">13</option>
+                </select>
+                <div id="desc-select-sizeSelector-ring-size" class="sr-only">Free Engraving</div>
+              </div>
+            </div>
+          </div>
+          <div class="w-full mb-4">
+            <div class="flex flex-col items-start" role="group" aria-labelledby="label-select-bandWidth-band-width">
+              <div class="flex flex-row justify-between w-full"><label id="label-select-bandWidth-band-width"
+                  class="font-sans text-[rgb(28,23,148)] text-xs leading-none tracking-tight mb-2 flex items-center gap-1"
+                  for="input-select-bandWidth-band-width">Band Width</label></div><select
+                id="input-select-bandWidth-band-width"
+                class="w-full border-[rgb(28,23,148)] font-sans text-[rgb(28,23,148)] ring-1 ring-[rgb(28,23,148)] focus:outline-none focus:ring-0 focus:border-blue-600 py-0 px-3 h-12 appearance-none outline-none focus:border-2 focus:rounded text-lg 3xl:text-2xl 4xl:text-3xl"
+                name="bandWidth" placeholder="Free Engraving" aria-labelledby="label-select-bandWidth-band-width"
+                aria-describedby="desc-select-bandWidth-band-width"
+                style="background-image: url('/assets/images/icons/chevron-down-theme-blue.svg'); background-size: 16px;">
+                <option value="1.5mm band" aria-label="1.5mm band">1.5mm band</option>
+                <option value="1.8mm band" aria-label="1.8mm band">1.8mm band</option>
+                <option value="2.0mm band" aria-label="2.0mm band">2.0mm band</option>
+              </select>
+              <div id="desc-select-bandWidth-band-width" class="sr-only">Free Engraving</div>
+            </div>
+          </div>
+          <div class="mb-5">
+            <div class="flex flex-col items-start" role="group" aria-labelledby="label-text-engraving-engraving">
+              <div class="flex flex-row justify-between w-full"><label id="label-text-engraving-engraving"
+                  class="font-sans text-[rgb(28,23,148)] text-xs leading-none tracking-tight mb-2 flex items-center gap-1"
+                  for="input-text-engraving-engraving">Engraving</label></div><input id="input-text-engraving-engraving"
+                class="w-full border-theme-blue font-sans text-theme-blue focus:outline-none focus:ring-0 focus:border-theme-blue py-0 px-3 h-12 appearance-none outline-none text-lg 3xl:text-2xl 3xl:leading-none 4xl:text-3xl"
+                type="text" name="engraving" placeholder="Free Engraving"
+                aria-labelledby="label-text-engraving-engraving" aria-describedby="desc-text-engraving-engraving"
+                maxlength="20" value="">
+              <div id="desc-text-engraving-engraving" class="sr-only border-gray-400 border-1">Free Engraving</div>
+            </div>
+          </div>
+          <div>
+            <div class="flex flex-col my-5 space-y-3 md:space-y-5 w-full">
+              <div>
+                <h2 id="variant-price"
+                  class="text-2xl 3xl:text-3xl 3xl:leading-none 4xl:text-4/5xl leading-tight visibile">$800</h2>
+              </div><button
+                class="w-full h-12 xl:h-16 border font-sans text-sm xl:text-lg 3xl:text-2xl 4xl:text-3xl 4xl:leading-none transition-colors duration-300 uppercase tracking-widest focus:outline-none border-[rgb(28,23,148)] hover:bg-[rgb(28,23,148)] bg-white text-[rgb(28,23,148)] hover:text-white disabled:bg-white disabled:text-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed"
+                aria-disabled="false" aria-busy="false" id="ring-add-to-cart" type="button" value="Continue">Select this
+                setting</button>
+              <div>
+                <div><button
+                    class="w-full h-12 xl:h-16 border font-sans text-sm xl:text-lg 3xl:text-2xl 4xl:text-3xl 4xl:leading-none transition-colors duration-300 uppercase tracking-widest focus:outline-none border-[rgb(28,23,148)] hover:bg-[rgb(28,23,148)] bg-white text-[rgb(28,23,148)] hover:text-white disabled:bg-white disabled:text-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed"
+                    aria-disabled="false" aria-busy="false" id="tah-add-to-cart-button" type="button"
+                    value="Continue">Try this ring at home</button></div>
+                <div class="w-full mt-3"><span class="text-theme-blue text-base font-medium leading-normal">By default,
+                    this setting comes with a 2 carat FG+ VS+ lab diamond for an additional $2400. Or choose your own
+                    diamond from over 150,000 available options.</span></div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="text-sm 3xl:text-lg 4xl:text-2xl leading-tight 3xl:leading-snug 4xl:leading-tight">
+          <div class="mb-4">
+            <p class="affirm-as-low-as" data-page-type="product" data-amount="80000"></p>
+          </div>
+          <p>Order now and your order is estimated to ship by Tue, Mar 18</p><br>
+          <p class="uppercase mb-1"><span>HAVE A QUESTION?</span> <a class="underline" href="/contact/?">GET IN
+              TOUCH</a></p>
+        </div>
+        <!-- Rest of the content -->
+      </nav>
+    </div>
+  </section>
+  <section class="p-vw-1/12 md:pt-8 md:pb-20 md:px-24 xl:py-16 xl:px-24 min-h-section">
+    <h1
+      class="font-serif text-[rgb(28,23,148)] text-center text-2xl leading-tight xl:text-4/5xl 3xl:text-6xl 3xl:leading-none 4xl:text-8xl xl:leading-none uppercase mb-7">
+      Frank Darling REVIEWs</h1>
+
+    <div id="looxReviews" data-product-id="4807514292356" data-upgraded="true" style="height: 2596px;"><iframe
+        id="looxReviewsFrame" title="Product reviews widget" src="../public/images/review.htm" height="2596px"
+        width="100%" frameborder="0" scrolling="no" margin="0"
+        style="overflow: hidden; height: 2596px; width: 100%; box-shadow: unset; outline: unset;"></iframe></div>
+
+  </section>
+</body>
+
+</html>

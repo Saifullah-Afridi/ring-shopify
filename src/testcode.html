@@ -1,0 +1,83 @@
+<section x-data="{
+currentSlide: 0,
+slides: [
+  { type: 'video', poster: 'https://videos.frankdarling.com/rings/7550922883311/YG-1647891628344_thumbnail.0000000.jpeg', safari: 'https://videos.frankdarling.com/rings/7550922883311/YG-1647891628344_safari.mp4', others: 'https://videos.frankdarling.com/rings/7550922883311/YG-1647891628344_others.mp4' },
+  { type: 'video', poster: 'https://videos.frankdarling.com/rings/7550922883311/YGB-1647891632126_thumbnail.0000000.jpeg', safari: 'https://videos.frankdarling.com/rings/7550922883311/YGB-1647891632126_safari.mp4', others: 'https://videos.frankdarling.com/rings/7550922883311/YGB-1647891632126_others.mp4' },
+  { type: 'image', src: 'https://uploads.frankdarling.com/s/files/1/0042/2405/7462/products/yellow-gold-front-view-low-profile-trillion-solitaire-engagement-ring.avif' },
+  { type: 'image', src: 'https://uploads.frankdarling.com/s/files/1/0042/2405/7462/products/yellow-gold-side-view-low-profile-trillion-solitaire-engagement-ring.avif' },
+  { type: 'image', src: 'https://uploads.frankdarling.com/s/files/1/0042/2405/7462/products/yellow-gold-back-view-low-profile-trillion-solitaire-engagement-ring.avif' }
+],
+next() {
+  this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+},
+prev() {
+  this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+}
+}"
+  class="relative w-full md:w-vw-2/3 h-vw-full md:h-vw-2/3 xl:h-vw-1/2 border-l border-r md:border-0 border-theme-blue overflow-hidden">
+  <!-- Slides Container -->
+  <ul class="slider flex transition-transform duration-500 ease-in-out"
+    :style="'transform: translateX(-' + currentSlide * 100 + '%)'">
+    <template x-for="(slide, index) in slides" :key="index">
+      <li class="slide w-full flex-shrink-0">
+        <!-- Video Slide -->
+        <template x-if="slide.type === 'video'">
+          <div class="w-full h-full bg-cover bg-center" :style="'background-image: url(' + slide.poster + ');'">
+            <video class="w-full h-full object-cover" autoplay playsinline loop>
+              <source :src="slide.safari" type='video/mp4; codecs="hev1"' />
+              <source :src="slide.others" type='video/mp4; codecs="avc1.42E01E"' />
+            </video>
+          </div>
+        </template>
+
+        <!-- Image Slide -->
+        <template x-if="slide.type === 'image'">
+          <img class="w-full h-full object-cover" :src="slide.src" alt="Carousel Image" />
+        </template>
+      </li>
+    </template>
+  </ul>
+
+  <!-- Left Button -->
+  <button @click="prev()"
+    class="absolute left-0 top-1/2 transform -translate-y-1/2 flex items-center w-vw-1/12 z-10 focus:outline-none rotate-180 h-vw-2/3 xl:h-vw-1/2">
+    <img src="../public/images/arrow.svg" alt="Previous" style="width: 50%" />
+  </button>
+
+  <!-- Right Button -->
+  <button @click="next()"
+    class="absolute right-0 top-1/2 transform -translate-y-1/2 flex items-center w-vw-1/12 z-10 focus:outline-none h-vw-2/3 xl:h-vw-1/2">
+    <img src="../public/images/arrow.svg" alt="Next" style="width: 50%" />
+  </button>
+
+  <!-- Indicators -->
+  <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2">
+    <template x-for="(slide, index) in slides" :key="index">
+      <button @click="currentSlide = index" class="w-3 h-3 rounded-full border border-white transition-all duration-300"
+        :class="currentSlide === index ? 'bg-white' : 'bg-gray-400'"></button>
+    </template>
+  </div>
+</section>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link href="./output.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <style>
+    .carousel-root {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slide {
+      flex: 0 0 100%;
+    }
+  </style>
+</head>
