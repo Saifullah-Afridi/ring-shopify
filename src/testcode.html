@@ -1,83 +1,1612 @@
-<section x-data="{
-currentSlide: 0,
-slides: [
-  { type: 'video', poster: 'https://videos.frankdarling.com/rings/7550922883311/YG-1647891628344_thumbnail.0000000.jpeg', safari: 'https://videos.frankdarling.com/rings/7550922883311/YG-1647891628344_safari.mp4', others: 'https://videos.frankdarling.com/rings/7550922883311/YG-1647891628344_others.mp4' },
-  { type: 'video', poster: 'https://videos.frankdarling.com/rings/7550922883311/YGB-1647891632126_thumbnail.0000000.jpeg', safari: 'https://videos.frankdarling.com/rings/7550922883311/YGB-1647891632126_safari.mp4', others: 'https://videos.frankdarling.com/rings/7550922883311/YGB-1647891632126_others.mp4' },
-  { type: 'image', src: 'https://uploads.frankdarling.com/s/files/1/0042/2405/7462/products/yellow-gold-front-view-low-profile-trillion-solitaire-engagement-ring.avif' },
-  { type: 'image', src: 'https://uploads.frankdarling.com/s/files/1/0042/2405/7462/products/yellow-gold-side-view-low-profile-trillion-solitaire-engagement-ring.avif' },
-  { type: 'image', src: 'https://uploads.frankdarling.com/s/files/1/0042/2405/7462/products/yellow-gold-back-view-low-profile-trillion-solitaire-engagement-ring.avif' }
-],
-next() {
-  this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-},
-prev() {
-  this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
-}
-}"
-  class="relative w-full md:w-vw-2/3 h-vw-full md:h-vw-2/3 xl:h-vw-1/2 border-l border-r md:border-0 border-theme-blue overflow-hidden">
-  <!-- Slides Container -->
-  <ul class="slider flex transition-transform duration-500 ease-in-out"
-    :style="'transform: translateX(-' + currentSlide * 100 + '%)'">
-    <template x-for="(slide, index) in slides" :key="index">
-      <li class="slide w-full flex-shrink-0">
-        <!-- Video Slide -->
-        <template x-if="slide.type === 'video'">
-          <div class="w-full h-full bg-cover bg-center" :style="'background-image: url(' + slide.poster + ');'">
-            <video class="w-full h-full object-cover" autoplay playsinline loop>
-              <source :src="slide.safari" type='video/mp4; codecs="hev1"' />
-              <source :src="slide.others" type='video/mp4; codecs="avc1.42E01E"' />
-            </video>
-          </div>
-        </template>
-
-        <!-- Image Slide -->
-        <template x-if="slide.type === 'image'">
-          <img class="w-full h-full object-cover" :src="slide.src" alt="Carousel Image" />
-        </template>
-      </li>
-    </template>
-  </ul>
-
-  <!-- Left Button -->
-  <button @click="prev()"
-    class="absolute left-0 top-1/2 transform -translate-y-1/2 flex items-center w-vw-1/12 z-10 focus:outline-none rotate-180 h-vw-2/3 xl:h-vw-1/2">
-    <img src="../public/images/arrow.svg" alt="Previous" style="width: 50%" />
-  </button>
-
-  <!-- Right Button -->
-  <button @click="next()"
-    class="absolute right-0 top-1/2 transform -translate-y-1/2 flex items-center w-vw-1/12 z-10 focus:outline-none h-vw-2/3 xl:h-vw-1/2">
-    <img src="../public/images/arrow.svg" alt="Next" style="width: 50%" />
-  </button>
-
-  <!-- Indicators -->
-  <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2">
-    <template x-for="(slide, index) in slides" :key="index">
-      <button @click="currentSlide = index" class="w-3 h-3 rounded-full border border-white transition-all duration-300"
-        :class="currentSlide === index ? 'bg-white' : 'bg-gray-400'"></button>
-    </template>
-  </div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link href="./output.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpine.js Example</title>
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-  <style>
-    .carousel-root {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .slider {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-
-    .slide {
-      flex: 0 0 100%;
-    }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
+<body class="bg-gray-100 p-10">
+
+  <div class="content flex flex-col w-full" role="document">
+    <main id="main-content" tabindex="-1" class="w-full">
+      <div class="">
+        <div class="bg-[rgb(28,23,148)] py-5 px-8 text-white w-full flex font-serif uppercase mt-10 lg:mt-16">
+          <div class="flex items-center space-x-5 cursor-pointer"><svg class="h-4 fill-current md:h-6" viewBox="0 0 6 9"
+              fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M1.707 4.5 5.354.854 4.646.146.293 4.5l4.353 4.354.708-.708L1.707 4.5Z" fill="white"></path>
+            </svg><span class="text-xl leading-tight md:text-2xl">Back to all diamonds</span></div>
+        </div>
+        <section class="relative flex flex-col items-start border-white md:flex-row transform-gpu md:border-b">
+          <section class="relative flex flex-col w-full md:w-vw-2/3">
+            <div class="relative">
+              <div class="absolute top-8 right-8 z-[99999] md:flex hidden"><a
+                  class="text-theme-blue block relative cursor-pointer"><svg class="h-8 w-8 text-theme-blue"
+                    viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="Icons/misc/Heart/Outline">
+                      <path id="Mask" fill-rule="evenodd" clip-rule="evenodd"
+                        d="M62.7758 7.74005C53.7123 4.06519 44.23 7.28152 38.2535 15.9344C32.2761 7.28152 22.7938 4.06233 13.7293 7.74005C5.22935 11.188 -2.46076 21.2384 0.742173 35.157C6.2625 59.1623 36.6032 71.6883 37.8922 72.2097C38.0082 72.2564 38.1309 72.2803 38.2535 72.2803C38.3762 72.2803 38.4989 72.2574 38.6148 72.2097C39.9039 71.6883 70.2417 59.1623 75.7649 35.157C78.9669 21.2384 71.2767 11.188 62.7758 7.74005ZM72.4773 34.9102C67.6903 55.7105 41.5819 67.6131 38.2535 69.0528C34.9242 67.6149 8.81577 55.7251 4.02972 34.9102C1.19453 22.5875 7.93696 13.7164 15.4008 10.6895C17.6627 9.77148 19.8289 9.36874 21.8737 9.36874C28.8682 9.36874 34.4291 14.0844 37.4686 19.0215C37.8026 19.5643 38.7026 19.5643 39.0385 19.0215C42.965 12.6428 51.0997 6.63291 61.1043 10.6895C68.5692 13.7164 75.3116 22.5875 72.4773 34.9102Z"
+                        class="fill-current"></path>
+                    </g>
+                  </svg></a></div>
+              <div class=" absolute left-2 md:left-4 bottom-1 sm:bottom-2 md:bottom-4 right-2 md:right-4 z-30">
+                <div class="flex justify-between items-center">
+                  <div
+                    class="flex flex-col w-44 xl:w-80 shadow-md rounded-lg xl:rounded-xl px-3.5 xl:px-6 bg-white text-theme-blue z-30">
+                    <div
+                      class="cursor-pointer z-20 flex justify-between items-center xl:border-b border-theme-blue xl:pb-4 xl:pt-6 pt-3 pb-3">
+                      <svg viewBox="0 0 22 36" fill="fill-current" xmlns="http://www.w3.org/2000/svg"
+                        class="w-6 hidden xl:block">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M12.8294 0.873993C12.8154 0.908781 12.7991 0.944861 12.7808 0.98136C12.7658 1.01147 12.7489 1.04265 12.7291 1.0766C12.7243 1.08485 12.7195 1.09314 12.7145 1.10139C12.6181 1.26149 12.4876 1.42554 12.3371 1.57575C12.3109 1.60187 12.2839 1.62742 12.257 1.65248L12.221 1.68544C12.0065 1.87668 11.7775 2.02058 11.576 2.09069C11.3822 2.15802 11.2315 2.15148 11.1517 2.07202C11.1489 2.06921 11.1462 2.06632 11.1435 2.06335L11.1292 2.07586L11.141 2.06027L11.1359 2.05412L11.1208 2.06579L11.133 2.05031L11.1287 2.04438L11.113 2.0551L11.1259 2.04009L11.1159 2.02305L11.0991 2.03206L11.1138 2.01891L11.1053 1.99952L11.0874 2.00617L11.1037 1.99534C11.1024 1.99165 11.1012 1.98792 11.0996 1.98294C11.0983 1.97865 11.0971 1.97424 11.0955 1.96808L11.093 1.95694C11.0937 1.95777 11.0944 1.95857 11.0951 1.95941L11.0977 1.9626C11.1009 1.96625 11.1041 1.96975 11.1075 1.97317C11.1984 2.06362 11.3698 2.05849 11.5901 1.95872C11.7997 1.8639 12.0333 1.69411 12.2479 1.48055C12.4624 1.26708 12.6331 1.03462 12.7284 0.826012C12.8252 0.61413 12.8333 0.447719 12.7518 0.35518C12.7548 0.356245 12.7579 0.357461 12.7632 0.359628L12.7712 0.363088L12.7726 0.360313L12.776 0.361149L12.7751 0.364951L12.7789 0.366852L12.7812 0.362442L12.7839 0.363088L12.7824 0.368753L12.7876 0.371567L12.7914 0.364951L12.7937 0.365521L12.7912 0.373696L12.812 0.387915L12.8237 0.372897L12.815 0.390348L12.8221 0.396317C12.8244 0.398446 12.8267 0.400651 12.829 0.402895C12.9164 0.489845 12.9165 0.657168 12.8294 0.873993ZM11.3422 1.13667L11.3342 1.11408C11.3403 1.11713 11.3462 1.1204 11.3524 1.12317L11.3422 1.13667ZM11.0761 1.96092L11.0913 1.95309C11.0923 1.95449 11.0934 1.9559 11.0945 1.95727L11.0761 1.96092ZM11.2806 2.21199C11.2621 2.21503 11.2441 2.2175 11.2266 2.21914L11.2806 2.21199ZM11.068 1.85846V1.85843V1.85846ZM11.3757 1.13131C11.3814 1.13352 11.3872 1.13553 11.3934 1.13755C11.3993 1.13949 11.4052 1.14124 11.4116 1.14302C11.4483 1.15325 11.4857 1.15819 11.5227 1.15819C11.6275 1.15819 11.729 1.11824 11.8033 1.04429C11.9035 0.944601 11.9416 0.795679 11.9022 0.653296C11.9006 0.647859 11.899 0.642461 11.8965 0.634933C11.8948 0.629724 11.893 0.624554 11.8904 0.617786C11.8901 0.61714 11.8898 0.616455 11.8895 0.615809L11.8907 0.615087C11.8918 0.617748 11.893 0.620676 11.8943 0.624249C11.896 0.628926 11.8975 0.63364 11.8999 0.640902L11.9083 0.665843L11.9654 0.623641L12.1167 0.52308L12.2822 0.43381C12.2881 0.431073 12.2939 0.428449 12.2999 0.425788L12.3491 0.404611L12.4771 0.361155L12.5647 0.351498V0.332526L12.5691 0.35165C12.5729 0.351688 12.5766 0.351764 12.5803 0.351916L12.5812 0.332945L12.586 0.352372C12.589 0.352525 12.592 0.352715 12.5964 0.353247L12.6125 0.35568C12.6158 0.35625 12.6191 0.356859 12.6233 0.357847L12.6378 0.361953C12.6407 0.362866 12.6435 0.36374 12.6478 0.365451L12.6767 0.380659L12.6905 0.367238L12.6808 0.383815L12.6855 0.387388C12.6883 0.389708 12.691 0.392141 12.6935 0.394612C12.7604 0.461222 12.7497 0.607027 12.6639 0.794614C12.5721 0.995699 12.4065 1.22093 12.1976 1.42874C11.9888 1.63652 11.7625 1.80133 11.5604 1.89281C11.3719 1.97804 11.2253 1.98877 11.1584 1.92223C11.0917 1.85585 11.1022 1.71062 11.1872 1.52375C11.2042 1.48642 11.224 1.44786 11.2459 1.40916C11.2532 1.39635 11.2608 1.38338 11.2686 1.37042C11.3081 1.30453 11.3543 1.23697 11.4059 1.16964L11.4169 1.15017L11.3963 1.13991C11.391 1.13823 11.3857 1.13652 11.3801 1.13447C11.3757 1.13287 11.3713 1.13112 11.3662 1.12907L11.3577 1.12344C11.3637 1.12603 11.3695 1.12896 11.3757 1.13131ZM12.4561 0.313825L12.4467 0.298199L12.4518 0.295309L12.4561 0.313825ZM13.0607 0.346872L13.0608 0.346529L13.0607 0.346187C13.051 0.248173 13.0163 0.167002 12.9561 0.107007C12.9365 0.0875413 12.9144 0.0710409 12.8905 0.0568597C12.8138 0.0114645 12.716 -0.00701291 12.601 0.00237789L12.6009 0.00233987L12.6008 0.00237789C12.5097 0.00979167 12.408 0.0344282 12.298 0.0764777C12.2583 0.0916474 12.2177 0.109326 12.1768 0.128678L12.176 0.128906L12.175 0.129477C12.0751 0.176811 11.9724 0.236121 11.8701 0.305545L11.7026 0.402342C11.5427 0.310791 11.3424 0.332919 11.214 0.460702C11.0768 0.597229 11.0606 0.814966 11.1755 0.97845C11.179 0.983468 11.1827 0.988487 11.1865 0.993316C11.1893 0.997003 11.1922 1.0005 11.1951 1.00404L11.1942 1.00472C11.1934 1.00373 11.1926 1.00282 11.1918 1.00187C11.1883 0.997498 11.1847 0.993125 11.1815 0.988677L11.1663 0.968147L11.1509 0.988373C11.1241 1.02331 11.0989 1.05848 11.0744 1.09372L11.0737 1.09426L11.0731 1.09559C10.9711 1.24299 10.8897 1.3918 10.8358 1.53144C10.7236 1.8224 10.7346 2.05497 10.8666 2.18633C10.9378 2.25723 11.0399 2.29301 11.165 2.29301C11.2549 2.29301 11.3566 2.27453 11.4673 2.23746C11.7206 2.15249 12.0045 1.97623 12.2669 1.74089L12.2852 1.72435C12.3188 1.69398 12.3521 1.66238 12.3843 1.63037L12.3909 1.62387C12.6666 1.34948 12.8782 1.04335 12.9868 0.761853C13.0477 0.603997 13.072 0.463515 13.0607 0.346872ZM21.8777 14.4297C21.8674 14.3075 21.6841 13.7711 21.4718 13.1501C20.9502 11.6241 20.1619 9.31812 20.2135 8.32988C20.2358 7.90197 20.1528 7.78742 20.122 7.78103C20.0605 7.76848 19.8635 7.94208 19.6903 8.4025C19.5528 8.76801 19.4724 9.20657 19.4636 9.63737C19.4472 10.4558 19.5154 11.4079 19.6506 12.2499C19.7562 12.9075 19.8965 13.4652 20.0573 13.8696C20.4097 13.8348 20.6269 13.823 20.6292 13.8228L20.6395 14.0126C20.6374 14.0128 20.4483 14.0231 20.1367 14.053C20.2049 14.1974 20.275 14.313 20.3457 14.3965L20.1996 14.519C20.1083 14.4112 20.0198 14.2612 19.936 14.0732C18.9864 14.1739 17.2432 14.4264 15.745 15.0142L15.6749 14.8373C15.8892 14.7533 16.1084 14.6762 16.3294 14.6051C15.8788 13.9391 13.8769 11.8456 13.8555 11.8234L13.9938 11.6922C14.0818 11.7841 16.0508 13.8432 16.5003 14.5182L19.4533 12.2242C19.3223 11.3855 19.2564 10.4448 19.2727 9.6336C19.2824 9.14806 19.3717 8.75627 19.4606 8.48165C19.2734 8.50507 19.0809 8.53343 18.8972 8.56138C18.8026 8.57579 18.6899 8.59324 18.5621 8.61305C17.2496 8.81618 14.5587 9.23254 13.0209 9.25569C13.0673 9.37842 13.1623 9.57863 13.3354 9.75409C13.7235 10.1471 14.291 10.2218 15.0222 9.97585C15.475 9.82347 15.8377 9.77808 16.1636 9.83313C16.3815 9.86985 16.5592 9.94494 16.7472 10.0245C17.2024 10.2169 17.7181 10.435 19.0199 10.1175C19.0654 10.1065 19.1123 10.1299 19.1306 10.1728C19.1488 10.2158 19.1331 10.2657 19.0933 10.2904C18.2334 10.8262 15.9656 12.3209 15.8003 12.7969L15.6197 12.7347C15.7945 12.2315 17.6613 10.9821 18.5528 10.4079C17.5544 10.5723 17.0895 10.3757 16.6725 10.1994C16.5106 10.131 16.3567 10.0663 16.1823 10.0304L14.8808 11.4616L14.7391 11.3341L15.9503 10.0021C15.7013 9.99231 15.4207 10.0424 15.0834 10.1559C14.838 10.2384 14.549 10.3049 14.2552 10.3049C13.9078 10.3049 13.5537 10.212 13.2568 9.94247C10.9939 11.4665 8.27212 14.479 8.0276 14.7518C8.01331 15.1136 7.97178 15.435 7.92933 15.682C7.7676 16.6224 7.42477 17.492 7.10861 17.7871C7.4681 17.5611 7.84417 17.3388 8.23452 17.1226C10.2502 16.0064 12.1656 15.3058 13.2985 15.2631C13.2469 15.1505 13.1931 15.0317 13.1371 14.9057C12.6673 13.8493 12.2648 12.8103 12.2608 12.7999L12.4391 12.7317C13.0525 14.3178 14.1764 16.8982 14.5808 17.0703L14.5057 17.2451C14.4148 17.2064 14.1549 17.0957 13.3856 15.4513C11.0809 15.4679 5.24474 18.5961 3.67555 21.025L3.51489 20.9222C4.12054 19.9847 5.395 18.8736 7.03243 17.835L6.93229 17.6856C7.18132 17.5204 7.56128 16.6951 7.74105 15.6499C7.85991 14.9583 7.97319 13.667 7.46072 12.5687C7.28012 12.9014 7.16905 13.0995 7.16309 13.1101L6.9964 13.0172C7.02945 12.9586 10.3017 7.12284 10.8124 4.39635C11.0845 2.94397 10.8692 2.37547 10.6407 2.15431C10.5001 2.01828 10.3443 2.00581 10.2672 2.00942C9.99108 2.74924 6.97065 10.7255 3.51756 15.1434C2.04676 17.0252 1.08265 18.8266 0.570148 20.6506C0.128441 22.2225 0.0926413 23.5457 0.0610444 24.7132C0.0551605 24.93 0.0496588 25.1347 0.0416736 25.3371C-0.0461636 27.5652 0.0305554 35.0549 0.0406802 36L7.61844 35.7139L6.89714 23.3042C6.48871 23.4329 6.11482 23.5117 5.80347 23.5166L5.80049 23.3265C6.7782 23.3113 8.72433 22.4553 11.14 20.9781C13.0597 19.8041 14.9723 18.4032 15.4036 17.8551C16.251 16.7781 17.5831 16.4745 17.6806 16.4535C19.0781 16.0455 21.3514 15.35 21.5132 15.2175L21.5185 15.212C21.6928 15.034 21.9098 14.8125 21.8777 14.4297ZM14.5597 8.2356C13.6087 8.40349 12.8503 8.50885 12.6069 8.5415C12.6112 8.68936 12.6508 9.00584 12.9032 9.06811C14.4036 9.0656 17.2955 8.61811 18.5325 8.42665C18.6605 8.40684 18.7733 8.38939 18.868 8.37498C19.0846 8.34198 19.3132 8.3086 19.5323 8.28305C19.6818 7.90875 19.9183 7.54608 20.1606 7.59642C20.3327 7.632 20.4155 7.85096 20.4074 8.24704C20.5195 8.25564 20.6219 8.27122 20.7164 8.29419C20.763 8.02851 20.8273 7.40674 20.4846 7.10965C20.2077 6.86949 19.714 6.87869 19.0178 7.13684C18.4936 7.33119 17.8467 7.52361 17.0949 7.70877C16.3405 7.89453 15.4875 8.07181 14.5597 8.2356ZM13.4915 1.93718C13.51 1.95219 13.5221 1.97356 13.5255 1.99702C13.5518 2.17826 13.7782 2.74258 14.7069 4.40205C15.266 5.4009 15.8203 6.3307 15.8258 6.33994L15.6616 6.43696C15.6556 6.42696 15.6404 6.40157 15.6178 6.36355C15.5609 6.5452 15.4355 6.82187 15.19 7.25773C15.0241 7.5523 14.8512 7.83326 14.7407 8.00899C15.5682 7.85923 16.3324 7.69875 17.0159 7.53127C17.079 7.44212 17.2906 7.11656 17.3696 6.65812C17.4929 5.9426 17.25 5.25692 16.6478 4.62021C14.6974 2.55799 14.3055 1.95284 13.8907 1.31218C13.7254 1.05695 13.555 0.793819 13.2786 0.427996C12.9334 1.06246 13.1363 1.64735 13.4915 1.93718ZM20.8972 10.7773C21.257 10.4628 21.474 10.0263 21.4831 9.58531C21.4907 9.21428 21.3482 8.88978 21.0814 8.67152C20.9921 8.59848 20.8871 8.54328 20.7605 8.50271C20.6549 8.46891 20.5366 8.44712 20.4014 8.43614C20.4037 8.96928 20.6223 9.85643 20.8972 10.7773Z"
+                          fill="#1C1794"></path>
+                      </svg>
+                      <div
+                        class="flex flex-row-reverse xl:flex-col justify-between items-center xl:items-end xl:space-y-4">
+                        <span class=""><svg class="w-3.5 stroke-current stroke-1 " viewBox="0 0 12 11" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.25736 9.74264L10.5 5.5L6.25736 1.25736"></path>
+                            <path d="M10.5 5.5L0 5.5"></path>
+                          </svg></span><span class="text-xs leading-none mr-2 xl:mr-0">See Diamond on Hand</span>
+                      </div>
+                    </div>
+                    <div class="pt-4 text-xs hidden xl:block xl:pb-6 pb-3">
+                      <p>Drag on image to rotate diamond</p>
+                      <p>Press A to zoom in, D to zoom out</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="h-vw-extended md:h-vw-1/2 overflow-hidden flex items-center justify-center relative  z-10"
+                style="max-height: calc(-215px + 100vh);">
+                <div class="absolute inset-0 flex items-center justify-center thumbnail"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div
+                    class="relative flex w-full border-l border-r md:w-vw-2/3 h-vw-full md:h-vw-2/3 xl:h-vw-1/2 md:border-0 border-theme-blue justify-center">
+                    <div class="relative flex w-full">
+                      <div class="carousel-root z-10 flex items-stretch w-full overflow-hidden md:items-center">
+                        <div class="carousel carousel-slider" style="width: 100%;">
+                          <div class="slider-wrapper axis-horizontal">
+                            <ul class="slider animated"
+                              style="transform: translate3d(0px, 0px, 0px); transition-duration: 500ms;">
+                              <li class="slide selected previous">
+                                <div class="flex items-center justify-center w-full h-full cursor-default select-none">
+                                  <video autoplay="" loop="" playsinline=""
+                                    style="max-height: 1200px; height: calc(-215px + 100vh); transform: scale(1.008);"
+                                    __idm_id__="1073154">
+                                    <source src="../public/images/video.mp4" type="video/mp4" codecs="avc1.42E01E">
+                                  </video>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="z-20 block w-full md:hidden">
+              <nav
+                class="p-vw-1/12 md:pt-8 md:pb-20 md:px-6 xl:py-16 xl:px-12 text-theme-blue border-t md:border-t-0 border-l border-r md:border-r-0 md:border-b border-theme-blue w-full flex flex-col overflow-y-scroll desktopHeight">
+                <hgroup class="font-serif">
+                  <h1 class="text-2xl leading-tight uppercase xl:text-4/5xl 3xl:text-6xl 4xl:text-8xl xl:leading-none">
+                    0.86 Carat Oval Lab Diamond</h1>
+                </hgroup>
+                <div class="mt-8 mb-6">
+                  <p class="flex text-lg leading-snug 3xl:text-2xl 4xl:text-3xl 3xl:leading-tight 4xl:leading-tight">
+                    <span class="w-20 3xl:w-32">Cut</span><span class="font-serif">Super Ideal</span>
+                  </p>
+                  <p class="flex text-lg leading-snug 3xl:text-2xl 4xl:text-3xl 3xl:leading-tight 4xl:leading-tight">
+                    <span class="w-20 3xl:w-32">Clarity</span><span class="font-serif">VVS2</span>
+                  </p>
+                  <p class="flex text-lg leading-snug 3xl:text-2xl 4xl:text-3xl 3xl:leading-tight 4xl:leading-tight">
+                    <span class="w-20 3xl:w-32">Carat</span><span class="font-serif">0.86</span>
+                  </p>
+                  <p class="flex text-lg leading-snug 3xl:text-2xl 4xl:text-3xl 3xl:leading-tight 4xl:leading-tight">
+                    <span class="w-20 3xl:w-32">Color</span><span class="font-serif">D</span>
+                  </p>
+                </div>
+                <div
+                  class="flex space-x-2 text-lg leading-tight md:text-2xl 3xl:text-3xl 4xl:text-4/5xl md:leading-tight 3xl:leading-none 4xl:leading-none">
+                  <h2>$1214</h2>
+                  <h2 class="text-gray-500 line-through">$1349</h2>
+                </div>
+                <div class="flex mt-3 mb-4 md:my-5 w-full"><button
+                    class="w-full h-12 xl:h-16 border font-sans text-sm xl:text-lg 3xl:text-2xl 4xl:text-3xl 4xl:leading-none transition-colors duration-300 uppercase tracking-widest focus:outline-none border-theme-blue hover:bg-theme-blue bg-white text-theme-blue hover:text-white disabled:bg-white disabled:text-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed"
+                    aria-disabled="false" aria-busy="false" type="button" value="Continue">Select this stone</button>
+                </div>
+                <div class="flex mb-4 md:mb-5 md:mt-1 w-full"><button
+                    class="w-full h-12 xl:h-16 bg-dark-blue text-white hover:bg-white hover:text-dark-blue hover:border-dark-blue border font-sans text-sm xl:text-lg 3xl:text-2xl 4xl:text-3xl 4xl:leading-none transition-colors duration-300 uppercase tracking-widest focus:outline-none disabled:bg-white disabled:text-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed"
+                    aria-disabled="false" aria-busy="false" type="button" value="Continue">PURCHASE WITHOUT
+                    setting</button></div>
+                <div class="flex mb-5 md:mt-1 w-full" data-tip="true" data-for="IRL_warning"><a target="_blank"
+                    rel="noreferrer" class="w-full cursor-pointer" href="/consultation/?"><button
+                      class="w-full h-12 xl:h-16 border font-sans text-sm xl:text-lg 3xl:text-2xl 4xl:text-3xl 4xl:leading-none transition-colors duration-300 uppercase tracking-widest focus:outline-none border-theme-blue hover:bg-theme-blue bg-white text-theme-blue hover:text-white disabled:bg-white disabled:text-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed"
+                      aria-disabled="false" aria-busy="false" type="button" value="Continue">Book Appointment to see
+                      IRL</button></a></div>
+                <div class="flex flex-col space-y-4 text-xs leading-none">
+                  <div role="alert" aria-live="polite">
+                    <p>Prices updated regularly, <button class="underline cursor-pointer">get notified if the prices
+                        change</button>.</p>
+                  </div>
+                  <p>Order now with setting, and your order is estimated to ship by Wed, Mar 19.</p>
+                  <p>Order now without setting, and your order is estimated to ship by Thu, Mar 6.</p>
+                </div>
+                <div
+                  class="w-full flex flex-col lg:flex-row mt-4 pt-4 border-t justify-between lg:items-center border-theme-blue space-y-5 lg:space-y-0">
+                  <button class="flex items-center lg:justify-center space-x-2"><svg class="h-4 w-5 text-theme-blue"
+                      viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g id="Icons/misc/Heart/Outline">
+                        <path id="Mask" fill-rule="evenodd" clip-rule="evenodd"
+                          d="M62.7758 7.74005C53.7123 4.06519 44.23 7.28152 38.2535 15.9344C32.2761 7.28152 22.7938 4.06233 13.7293 7.74005C5.22935 11.188 -2.46076 21.2384 0.742173 35.157C6.2625 59.1623 36.6032 71.6883 37.8922 72.2097C38.0082 72.2564 38.1309 72.2803 38.2535 72.2803C38.3762 72.2803 38.4989 72.2574 38.6148 72.2097C39.9039 71.6883 70.2417 59.1623 75.7649 35.157C78.9669 21.2384 71.2767 11.188 62.7758 7.74005ZM72.4773 34.9102C67.6903 55.7105 41.5819 67.6131 38.2535 69.0528C34.9242 67.6149 8.81577 55.7251 4.02972 34.9102C1.19453 22.5875 7.93696 13.7164 15.4008 10.6895C17.6627 9.77148 19.8289 9.36874 21.8737 9.36874C28.8682 9.36874 34.4291 14.0844 37.4686 19.0215C37.8026 19.5643 38.7026 19.5643 39.0385 19.0215C42.965 12.6428 51.0997 6.63291 61.1043 10.6895C68.5692 13.7164 75.3116 22.5875 72.4773 34.9102Z"
+                          class="fill-current"></path>
+                      </g>
+                    </svg><span class="text-sm">Add to Wishlist</span></button>
+                  <div class="flex items-center lg:justify-center space-x-2">
+                    <font size="+2" class="leading-none flex items-center justify-center">◆ </font><span
+                      class="text-sm">Only One Available</span>
+                  </div><button class="flex items-center space-x-2 lg:justify-center"><svg viewBox="0 09 70 75"
+                      fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-theme-blue">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M36.8907 13.9082H22.4092L29.6502 21.1369L36.8907 13.9082ZM38.9783 29.5862H53.4598L46.2188 22.3578L38.9783 29.5862ZM37.5012 30.4494L37.4374 61.21L22.0646 30.4494H37.5012ZM38.3658 30.4494L38.3022 61.2084L53.8019 30.4494H38.3658ZM30.2615 21.7473L37.9344 14.087L45.6073 21.7473L37.9344 29.4075L34.0979 25.5774L30.2615 21.7473ZM29.0387 21.7473L21.3655 14.087L13.6924 21.7473L21.3655 29.4073L29.0387 21.7473ZM69.9068 29.5861H55.5472L62.7856 22.3561L69.9068 29.586V29.5861ZM5.83789 30.4494L36.2928 60.8534L21.0979 30.4494H5.83789ZM62.1765 21.7429L54.5033 29.4074L46.8304 21.7474L54.5036 14.0869L62.1765 21.7429ZM36.8907 29.5862L31.7705 24.4747L29.6502 22.3578L22.4092 29.5862H36.8907ZM5.84028 29.5861L13.0811 22.3578L20.3216 29.5861H5.84028ZM53.4598 13.9082H38.9783L46.219 21.1369L53.4598 13.9082ZM39.4592 60.8338L54.77 30.4495H69.8946L47.2465 53.0593L39.4592 60.8338Z"
+                        class="none" stroke="#1c1794"></path>
+                    </svg><span class="text-sm">Compare</span></button>
+                </div>
+                <div class="flex flex-col">
+                  <div class="mb-2 xl:mt-4 text-sm 4xl:text-2xl 4xl:leading-tight">
+                    <p class="affirm-as-low-as" data-page-type="product" data-amount="121500">Starting at <span
+                        class="affirm-ala-price">$110</span>/mo or 0% APR with <span
+                        class="__affirm-logo __affirm-logo-blue __ligature__affirm_full_logo__ __processed">Affirm</span>.
+                      <a class="affirm-modal-trigger"
+                        aria-label="See if you qualify - Learn more about Affirm Financing (opens in modal)"
+                        href="javascript:void(0)">See if you qualify</a>
+                    </p>
+                  </div>
+                </div>
+              </nav>
+            </div>
+            <div class="flex flex-col border-b border-white md:border-theme-blue">
+              <div class="w-full px-8 py-5 font-serif text-2xl text-center text-white uppercase bg-theme-blue">YOUR
+                DIAMOND</div>
+              <div class="flex w-full">
+                <div
+                  class="w-full py-vw-4 px-vw-1/12 md:py-vw-2 md:px-vw-4 border-theme-blue border-t flex flex-col relative z-10 justify-center text-theme-blue">
+                  <p
+                    class="font-serif text-lg 3xl:text-2xl 4xl:text-vw-1 3xl:leading-tight 4xl:leading-normal leading-snug mb-6 text-left">
+                    Specs</p>
+                  <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-2">
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Price per Carat</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">USD $1411.95 <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Carat Weight</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">0.86 <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Shape</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">Oval <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Cut</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">Super Ideal <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Color</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">D <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Clarity</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">VVS2 <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Length/Width Ratio</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">1.44 <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Depth</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">61.7% <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Table</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">58% <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Polish</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">Excellent <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Symmetry</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">Excellent <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Measurements</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">7.85mm x 5.46mm x 3.37mm <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Certificate</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">IGI <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="border-theme-blue border-b flex items-center justify-center relative w-full leading-6 text-sm 3xl:text-lg 4xl:text-vw-1 3xl:leading-6 4xl:leading-normal">
+                      <p class="w-1/2 flex items-center z-10"><span class="font-serif">Diamond Type</span></p>
+                      <p class="w-1/2 font-bold z-10 text-right">Lab <span
+                          class="block font-normal md:font-bold md:inline"></span></p>
+                      <div
+                        class="opacity-0 -translate-y-3 z-0 absolute left-0 lg:left-1/2 w-full lg:w-vw-1/3 bg-white border-theme-blue border transform transition-all ease-in-out duration-300"
+                        style="top: -1px;"><span class="w-3 h-3 absolute top-4 right-6 cursor-pointer"><img
+                            class="w-full h-full" src="/assets/images/icons/x.png" alt="close"></span>
+                        <div class="w-full flex"><img class="w-full h-full object-cover"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex justify-end mt-4"><a href="https://www.igi.org/verify-your-report/?r=LG612336840"
+                      target="_blank" class="text-xs underline text-current" rel="noreferrer">View Certificate</a></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="w-full grid grid-cols-1 lg:grid-cols-2 border-t border-theme-blue">
+                <div
+                  class="py-6 px-8 border-b lg:border-l border-theme-blue flex flex-col items-center text-theme-blue text-center">
+                  <div class="h-8 w-8"><img alt="filter_icon" loading="lazy" width="1" height="1" decoding="async"
+                      data-nimg="1" src="../public/images/carat.svg"
+                      style="color: transparent; width: 100%; height: auto;"></div>
+                  <div class="mt-1 font-serif text-xl uppercase">
+                    <div>Diamond Size:</div>
+                    <div>0.86 ct</div>
+                  </div>
+                  <div class="pt-4 text-sm text-center flex items-center" style="min-height: 116px;">The carat is the
+                    unit of weight of a diamond. Carat is often confused with size even though it is actually a measure
+                    of weight. One carat equals 200 milligrams or 0.2 grams. The scale below illustrates the typical
+                    size relationship between diamonds of increasing carat weights. Remember that while the measurements
+                    below are typical, every diamond is unique.</div>
+                  <div class="flex flex-col flex-1 justify-end w-full">
+                    <div class="h-24">
+                      <div class="w-full pt-10">
+                        <div class="relative flex-col justify-center">
+                          <div class="absolute w-full space-x-0.5 flex inset-0 flex-1 items-center">
+                            <div class="bg-theme-blue w-full h-0.5"></div>
+                            <div class="bg-theme-blue w-full h-0.5"></div>
+                            <div class="bg-theme-blue w-full h-0.5"></div>
+                            <div class="bg-theme-blue w-full h-0.5"></div>
+                            <div class="bg-theme-blue w-full h-0.5"></div>
+                          </div>
+                          <div class="bg-theme-blue rounded-full relative"
+                            style="height: 28.12px; width: 28.12px; left: 12.8421%;">
+                            <div class="-top-6 relative text-xs -left-1">0.86ct</div>
+                          </div>
+                        </div>
+                        <div class="flex justify-between text-xs mt-4">
+                          <div>0.25 Ct</div>
+                          <div>5 Ct+</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pt-8 text-xs">
+                      <div class="underline cursor-pointer">Learn About Carat</div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="py-6 px-8 border-b lg:border-l border-theme-blue flex flex-col items-center text-theme-blue text-center">
+                  <div class="h-8 w-8"><img alt="filter_icon" loading="lazy" width="1" height="1" decoding="async"
+                      data-nimg="1" src="../public/images/color.svg"
+                      style="color: transparent; width: 100%; height: auto;"></div>
+                  <div class="mt-1 font-serif text-xl uppercase">
+                    <div>Diamond Color:</div>
+                    <div>D</div>
+                  </div>
+                  <div class="pt-4 text-sm text-center flex items-center" style="min-height: 116px;">Colorless diamonds.
+                    Bright white. Set in platinum setting to maintain that icy white look.</div>
+                  <div class="flex flex-col flex-1 justify-end w-full">
+                    <div class="h-24">
+                      <div class="w-full pt-4">
+                        <div class="flex justify-center pb-8">
+                          <div class="flex justify-center w-full">
+                            <div class="flex border-theme-blue items-center w-full space-y-2 relative">
+                              <div class="flex items-end justify-center space-x-4 flex-1">
+                                <div class="space-y-1">
+                                  <div class="text-xs">D-F</div>
+                                  <div class="w-5 h-5 rounded-full border-theme-blue border"><img alt="filter_icon_0"
+                                      loading="lazy" width="1" height="1" decoding="async" data-nimg="1"
+                                      src="/assets/images/diamonds/diamond-color-preview/color-preview.svg"
+                                      style="color: transparent; width: 100%; height: auto;"></div>
+                                </div>
+                              </div>
+                              <div class="flex justify-end mx-2">
+                                <div class="h-5 w-0.5 bg-theme-blue relative top-1"></div>
+                              </div>
+                              <div class="text-xs absolute -bottom-8 w-full">Colorless</div>
+                            </div>
+                            <div class="flex border-theme-blue items-center w-full space-y-2 relative">
+                              <div class="flex items-end justify-center space-x-4 flex-1">
+                                <div class="space-y-1">
+                                  <div class="text-xs">G</div>
+                                  <div class="w-5 h-5 rounded-full " style="background: rgb(255, 255, 251);"><img
+                                      alt="filter_icon_0" loading="lazy" width="1" height="1" decoding="async"
+                                      data-nimg="1"
+                                      src="/assets/images/diamonds/diamond-color-preview/color-preview.svg"
+                                      style="color: transparent; width: 100%; height: auto;"></div>
+                                </div>
+                                <div class="space-y-1">
+                                  <div class="text-xs">H</div>
+                                  <div class="w-5 h-5 rounded-full " style="background: rgb(255, 255, 247);"><img
+                                      alt="filter_icon_1" loading="lazy" width="1" height="1" decoding="async"
+                                      data-nimg="1"
+                                      src="/assets/images/diamonds/diamond-color-preview/color-preview.svg"
+                                      style="color: transparent; width: 100%; height: auto;"></div>
+                                </div>
+                                <div class="space-y-1">
+                                  <div class="text-xs">I</div>
+                                  <div class="w-5 h-5 rounded-full " style="background: rgb(255, 255, 243);"><img
+                                      alt="filter_icon_2" loading="lazy" width="1" height="1" decoding="async"
+                                      data-nimg="1"
+                                      src="/assets/images/diamonds/diamond-color-preview/color-preview.svg"
+                                      style="color: transparent; width: 100%; height: auto;"></div>
+                                </div>
+                                <div class="space-y-1">
+                                  <div class="text-xs">J</div>
+                                  <div class="w-5 h-5 rounded-full " style="background: rgb(254, 255, 241);"><img
+                                      alt="filter_icon_3" loading="lazy" width="1" height="1" decoding="async"
+                                      data-nimg="1"
+                                      src="/assets/images/diamonds/diamond-color-preview/color-preview.svg"
+                                      style="color: transparent; width: 100%; height: auto;"></div>
+                                </div>
+                              </div>
+                              <div class="flex justify-end mx-2">
+                                <div class="h-5 w-0.5 bg-theme-blue relative top-1"></div>
+                              </div>
+                              <div class="text-xs absolute -bottom-8 w-full">Near Colorless</div>
+                            </div>
+                            <div class="flex border-theme-blue items-center w-full space-y-2 relative">
+                              <div class="flex items-end justify-center space-x-4 flex-1">
+                                <div class="space-y-1">
+                                  <div class="text-xs">K</div>
+                                  <div class="w-5 h-5 rounded-full " style="background: rgb(255, 254, 234);"><img
+                                      alt="filter_icon_0" loading="lazy" width="1" height="1" decoding="async"
+                                      data-nimg="1"
+                                      src="/assets/images/diamonds/diamond-color-preview/color-preview.svg"
+                                      style="color: transparent; width: 100%; height: auto;"></div>
+                                </div>
+                                <div class="space-y-1">
+                                  <div class="text-xs">L</div>
+                                  <div class="w-5 h-5 rounded-full " style="background: rgb(250, 250, 224);"><img
+                                      alt="filter_icon_1" loading="lazy" width="1" height="1" decoding="async"
+                                      data-nimg="1"
+                                      src="/assets/images/diamonds/diamond-color-preview/color-preview.svg"
+                                      style="color: transparent; width: 100%; height: auto;"></div>
+                                </div>
+                                <div class="space-y-1">
+                                  <div class="text-xs">M</div>
+                                  <div class="w-5 h-5 rounded-full " style="background: rgb(253, 253, 217);"><img
+                                      alt="filter_icon_2" loading="lazy" width="1" height="1" decoding="async"
+                                      data-nimg="1"
+                                      src="/assets/images/diamonds/diamond-color-preview/color-preview.svg"
+                                      style="color: transparent; width: 100%; height: auto;"></div>
+                                </div>
+                              </div>
+                              <div class="text-xs absolute -bottom-8 w-full">Champagne</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pt-8 text-xs">
+                      <div class="underline cursor-pointer">Learn About Color</div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="py-6 px-8 border-b lg:border-l border-theme-blue flex flex-col items-center text-theme-blue text-center">
+                  <div class="h-8 w-8"><img alt="filter_icon" loading="lazy" width="1" height="1" decoding="async"
+                      data-nimg="1" src="/assets/images/diamonds/filter/clarity.svg"
+                      style="color: transparent; width: 100%; height: auto;"></div>
+                  <div class="mt-1 font-serif text-xl uppercase">
+                    <div>Diamond CLARITY:</div>
+                    <div>VVS2</div>
+                  </div>
+                  <div class="pt-4 text-sm text-center flex items-center" style="min-height: 116px;">Inclusions so
+                    slight they are extremely hard for even a trained gemologist to see under 10x magnification. Really,
+                    you could spend hours searching. VVS diamonds are 99.9% of the time eye clean regardless of shape or
+                    size.</div>
+                  <div class="flex flex-col flex-1 justify-end w-full">
+                    <div class="h-24">
+                      <div class="w-full pt-10">
+                        <div class="relative flex space-x-0.5">
+                          <div class="relative w-full">
+                            <div class="h-10 flex justify-center items-center">
+                              <div class="w-full h-0.5 bg-theme-blue"></div>
+                            </div>
+                            <div class="text-xs">I1+</div>
+                          </div>
+                          <div class="relative w-full">
+                            <div class="h-10 flex justify-center items-center">
+                              <div class="w-full h-0.5 bg-theme-blue"></div>
+                            </div>
+                            <div class="text-xs">SI1, SI2</div>
+                          </div>
+                          <div class="relative w-full">
+                            <div class="h-10 flex justify-center items-center">
+                              <div class="w-full h-0.5 bg-theme-blue"></div>
+                            </div>
+                            <div class="text-xs">VS1, VS2</div>
+                          </div>
+                          <div class="relative w-full">
+                            <div class="h-10 flex justify-center items-center">
+                              <div class="bg-theme-blue w-[10px] h-[10px] rounded-full absolute"></div>
+                              <div class="w-full h-0.5 bg-theme-blue"></div>
+                            </div>
+                            <div class="text-xs">VVS1, VVS2</div>
+                          </div>
+                          <div class="relative w-full">
+                            <div class="h-10 flex justify-center items-center">
+                              <div class="w-full h-0.5 bg-theme-blue"></div>
+                            </div>
+                            <div class="text-xs">IF</div>
+                          </div>
+                          <div class="relative w-full">
+                            <div class="h-10 flex justify-center items-center">
+                              <div class="w-full h-0.5 bg-theme-blue"></div>
+                            </div>
+                            <div class="text-xs">FL</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pt-8 text-xs">
+                      <div class="underline cursor-pointer">Learn About Clarity</div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="py-6 px-8 border-b lg:border-l border-theme-blue flex flex-col items-center text-theme-blue text-center">
+                  <div class="h-8 w-8"><img alt="filter_icon" loading="lazy" width="1" height="1" decoding="async"
+                      data-nimg="1" src="/assets/images/diamonds/filter/cut.svg"
+                      style="color: transparent; width: 100%; height: auto;"></div>
+                  <div class="mt-1 font-serif text-xl uppercase">
+                    <div>Diamond Cut:</div>
+                    <div>Super Ideal</div>
+                  </div>
+                  <div class="pt-4 text-sm text-center flex items-center" style="min-height: 116px;">This diamond has
+                    the best cut grade available. Super Ideal Diamonds will be extremely bright with exceptional
+                    sparkle, strong contrast and crisp reflections. All super ideal diamonds have excellent symmetry and
+                    excellent polish which are hallmarks of exceptional craft!</div>
+                  <div class="flex flex-col flex-1 justify-end w-full">
+                    <div class="h-24">
+                      <div class="w-full pt-10">
+                        <div class="relative flex space-x-0.5">
+                          <div class="relative w-full">
+                            <div class="h-10 flex justify-center items-center">
+                              <div class="w-full h-0.5 bg-theme-blue"></div>
+                            </div>
+                            <div class="text-xs">Fair</div>
+                          </div>
+                          <div class="relative w-full">
+                            <div class="h-10 flex justify-center items-center">
+                              <div class="w-full h-0.5 bg-theme-blue"></div>
+                            </div>
+                            <div class="text-xs">Good</div>
+                          </div>
+                          <div class="relative w-full">
+                            <div class="h-10 flex justify-center items-center">
+                              <div class="w-full h-0.5 bg-theme-blue"></div>
+                            </div>
+                            <div class="text-xs">Very Good</div>
+                          </div>
+                          <div class="relative w-full">
+                            <div class="h-10 flex justify-center items-center">
+                              <div class="w-full h-0.5 bg-theme-blue"></div>
+                            </div>
+                            <div class="text-xs">Ideal</div>
+                          </div>
+                          <div class="relative w-full">
+                            <div class="h-10 flex justify-center items-center">
+                              <div class="bg-theme-blue w-[10px] h-[10px] rounded-full absolute"></div>
+                              <div class="w-full h-0.5 bg-theme-blue"></div>
+                            </div>
+                            <div class="text-xs">Super Ideal</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pt-8 text-xs">
+                      <div class="underline cursor-pointer">Learn About Cut</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="w-full flex flex-col border-b border-theme-blue justify-center items-center text-center p-8 text-theme-blue">
+                <div class="text-2xl font-serif uppercase">SUPPLIER STANDARDS</div>
+                <div class="mt-4 w-full max-w-[320px] text-sm">
+                  <div class="mt-2">All our suppliers are certified conflict-free. But, we hold them to even higher
+                    standards.</div>
+                  <div class="mt-2">Each Frank Darling supplier is graded on their level of traceability and
+                    sustainability. The higher the better.</div>
+                </div>
+                <div class="my-6 w-full flex justify-center">
+                  <div class="flex flex-col sm:flex-row w-full sm:max-w-[80%]">
+                    <div class="text-center w-full font-sm py-4 border border-theme-blue bg-theme-blue text-white">Level
+                      1</div>
+                    <div class="text-center w-full font-sm py-4 border border-theme-blue ">Level 2</div>
+                    <div class="text-center w-full font-sm py-4 border border-theme-blue ">Level 3</div>
+                    <div class="text-center w-full font-sm py-4 border border-theme-blue ">Level 4</div>
+                  </div>
+                </div>
+                <div class="mt-2 text-xs">
+                  <div class="underline cursor-pointer">Learn About Supplier Standards</div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <div class="sticky z-20 hidden md:block top-16 lg:top-12 md:w-vw-1/3">
+            <nav
+              class="p-vw-1/12 md:pt-8 md:pb-20 md:px-6 xl:py-16 xl:px-12 text-theme-blue border-t md:border-t-0 border-l border-r md:border-r-0 md:border-b border-theme-blue w-full flex flex-col overflow-y-scroll desktopHeight">
+              <hgroup class="font-serif">
+                <h1 class="text-2xl leading-tight uppercase xl:text-4/5xl 3xl:text-6xl 4xl:text-8xl xl:leading-none">
+                  0.86 Carat Oval Lab Diamond</h1>
+              </hgroup>
+              <div class="mt-8 mb-6">
+                <p class="flex text-lg leading-snug 3xl:text-2xl 4xl:text-3xl 3xl:leading-tight 4xl:leading-tight"><span
+                    class="w-20 3xl:w-32">Cut</span><span class="font-serif">Super Ideal</span></p>
+                <p class="flex text-lg leading-snug 3xl:text-2xl 4xl:text-3xl 3xl:leading-tight 4xl:leading-tight"><span
+                    class="w-20 3xl:w-32">Clarity</span><span class="font-serif">VVS2</span></p>
+                <p class="flex text-lg leading-snug 3xl:text-2xl 4xl:text-3xl 3xl:leading-tight 4xl:leading-tight"><span
+                    class="w-20 3xl:w-32">Carat</span><span class="font-serif">0.86</span></p>
+                <p class="flex text-lg leading-snug 3xl:text-2xl 4xl:text-3xl 3xl:leading-tight 4xl:leading-tight"><span
+                    class="w-20 3xl:w-32">Color</span><span class="font-serif">D</span></p>
+              </div>
+              <div
+                class="flex space-x-2 text-lg leading-tight md:text-2xl 3xl:text-3xl 4xl:text-4/5xl md:leading-tight 3xl:leading-none 4xl:leading-none">
+                <h2>$1214</h2>
+                <h2 class="text-gray-500 line-through">$1349</h2>
+              </div>
+              <div class="flex mt-3 mb-4 md:my-5 w-full"><button
+                  class="w-full h-12 xl:h-16 border font-sans text-sm xl:text-lg 3xl:text-2xl 4xl:text-3xl 4xl:leading-none transition-colors duration-300 uppercase tracking-widest focus:outline-none border-theme-blue hover:bg-theme-blue bg-white text-theme-blue hover:text-white disabled:bg-white disabled:text-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed"
+                  aria-disabled="false" aria-busy="false" type="button" value="Continue">Select this stone</button>
+              </div>
+              <div class="flex mb-4 md:mb-5 md:mt-1 w-full"><button
+                  class="w-full h-12 xl:h-16 bg-dark-blue text-white hover:bg-white hover:text-dark-blue hover:border-dark-blue border font-sans text-sm xl:text-lg 3xl:text-2xl 4xl:text-3xl 4xl:leading-none transition-colors duration-300 uppercase tracking-widest focus:outline-none disabled:bg-white disabled:text-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed"
+                  aria-disabled="false" aria-busy="false" type="button" value="Continue">PURCHASE WITHOUT
+                  setting</button></div>
+              <div class="flex mb-5 md:mt-1 w-full" data-tip="true" data-for="IRL_warning"><a target="_blank"
+                  rel="noreferrer" class="w-full cursor-pointer" href="/consultation/?"><button
+                    class="w-full h-12 xl:h-16 border font-sans text-sm xl:text-lg 3xl:text-2xl 4xl:text-3xl 4xl:leading-none transition-colors duration-300 uppercase tracking-widest focus:outline-none border-theme-blue hover:bg-theme-blue bg-white text-theme-blue hover:text-white disabled:bg-white disabled:text-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed"
+                    aria-disabled="false" aria-busy="false" type="button" value="Continue">Book Appointment to see
+                    IRL</button></a></div>
+              <div class="flex flex-col space-y-4 text-xs leading-none">
+                <div role="alert" aria-live="polite">
+                  <p>Prices updated regularly, <button class="underline cursor-pointer">get notified if the prices
+                      change</button>.</p>
+                </div>
+                <p>Order now with setting, and your order is estimated to ship by Wed, Mar 19.</p>
+                <p>Order now without setting, and your order is estimated to ship by Thu, Mar 6.</p>
+              </div>
+              <div
+                class="w-full flex flex-col lg:flex-row mt-4 pt-4 border-t justify-between lg:items-center border-theme-blue space-y-5 lg:space-y-0">
+                <button class="flex items-center lg:justify-center space-x-2"><svg class="h-4 w-5 text-theme-blue"
+                    viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="Icons/misc/Heart/Outline">
+                      <path id="Mask" fill-rule="evenodd" clip-rule="evenodd"
+                        d="M62.7758 7.74005C53.7123 4.06519 44.23 7.28152 38.2535 15.9344C32.2761 7.28152 22.7938 4.06233 13.7293 7.74005C5.22935 11.188 -2.46076 21.2384 0.742173 35.157C6.2625 59.1623 36.6032 71.6883 37.8922 72.2097C38.0082 72.2564 38.1309 72.2803 38.2535 72.2803C38.3762 72.2803 38.4989 72.2574 38.6148 72.2097C39.9039 71.6883 70.2417 59.1623 75.7649 35.157C78.9669 21.2384 71.2767 11.188 62.7758 7.74005ZM72.4773 34.9102C67.6903 55.7105 41.5819 67.6131 38.2535 69.0528C34.9242 67.6149 8.81577 55.7251 4.02972 34.9102C1.19453 22.5875 7.93696 13.7164 15.4008 10.6895C17.6627 9.77148 19.8289 9.36874 21.8737 9.36874C28.8682 9.36874 34.4291 14.0844 37.4686 19.0215C37.8026 19.5643 38.7026 19.5643 39.0385 19.0215C42.965 12.6428 51.0997 6.63291 61.1043 10.6895C68.5692 13.7164 75.3116 22.5875 72.4773 34.9102Z"
+                        class="fill-current"></path>
+                    </g>
+                  </svg><span class="text-sm">Add to Wishlist</span></button>
+                <div class="flex items-center lg:justify-center space-x-2">
+                  <font size="+2" class="leading-none flex items-center justify-center">◆ </font><span
+                    class="text-sm">Only One Available</span>
+                </div><button class="flex items-center space-x-2 lg:justify-center"><svg viewBox="0 09 70 75"
+                    fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-theme-blue">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M36.8907 13.9082H22.4092L29.6502 21.1369L36.8907 13.9082ZM38.9783 29.5862H53.4598L46.2188 22.3578L38.9783 29.5862ZM37.5012 30.4494L37.4374 61.21L22.0646 30.4494H37.5012ZM38.3658 30.4494L38.3022 61.2084L53.8019 30.4494H38.3658ZM30.2615 21.7473L37.9344 14.087L45.6073 21.7473L37.9344 29.4075L34.0979 25.5774L30.2615 21.7473ZM29.0387 21.7473L21.3655 14.087L13.6924 21.7473L21.3655 29.4073L29.0387 21.7473ZM69.9068 29.5861H55.5472L62.7856 22.3561L69.9068 29.586V29.5861ZM5.83789 30.4494L36.2928 60.8534L21.0979 30.4494H5.83789ZM62.1765 21.7429L54.5033 29.4074L46.8304 21.7474L54.5036 14.0869L62.1765 21.7429ZM36.8907 29.5862L31.7705 24.4747L29.6502 22.3578L22.4092 29.5862H36.8907ZM5.84028 29.5861L13.0811 22.3578L20.3216 29.5861H5.84028ZM53.4598 13.9082H38.9783L46.219 21.1369L53.4598 13.9082ZM39.4592 60.8338L54.77 30.4495H69.8946L47.2465 53.0593L39.4592 60.8338Z"
+                      class="none" stroke="#1c1794"></path>
+                  </svg><span class="text-sm">Compare</span></button>
+              </div>
+              <div class="flex flex-col">
+                <div class="mb-2 xl:mt-4 text-sm 4xl:text-2xl 4xl:leading-tight">
+                  <p class="affirm-as-low-as" data-page-type="product" data-amount="121500">Starting at <span
+                      class="affirm-ala-price">$110</span>/mo or 0% APR with <span
+                      class="__affirm-logo __affirm-logo-blue __ligature__affirm_full_logo__ __processed">Affirm</span>.
+                    <a class="affirm-modal-trigger"
+                      aria-label="See if you qualify - Learn more about Affirm Financing (opens in modal)"
+                      href="javascript:void(0)">See if you qualify</a>
+                  </p>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </section>
+        <div class="flex flex-col w-full">
+          <div class="py-10 font-serif text-2xl leading-none text-center text-white uppercase bg-theme-blue">Recently
+            Viewed Diamonds</div>
+          <ul class="relative flex flex-wrap w-full">
+            <li class="relative z-20 w-full overflow-hidden animate-appearRight sm:w-1/2 md:w-1/3 lg:w-1/4"
+              style="transition-delay: 0ms; mask-image: -webkit-radial-gradient(center, white, black);">
+              <div class="group w-full relative border-theme-blue text-theme-blue overflow-hidden group bg-[#ecefe9]"
+                style="padding-bottom: 100%;">
+                <div class="absolute bottom-0 left-0 right-0 z-10 w-full h-px bg-theme-blue"></div>
+                <div class="absolute top-0 bottom-0 right-0 z-10 w-px h-full bg-theme-blue"></div>
+                <article
+                  class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center w-full h-full p-4 text-theme-blue">
+                  <figure
+                    class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center w-full h-full animate-appearRight"
+                    style="transition-delay: 0ms;"><img
+                      class="relative block w-1/2 transition-all duration-300 ease-in transform group-hover:scale-110"
+                      src="/assets/images/diamond-selector/diamonds/cushion.webp" alt="M20238FD"></figure>
+                  <nav class="absolute top-0 w-full flex flex-row-reverse z-20">
+                    <div
+                      class="w-24 4xl:w-32 pt-5 pr-6 -right-10 relative flex flex-row justify-between
+           lg:transform lg:opacity-0 lg:group-hover:opacity-100 lg:-translate-y-full lg:group-hover:translate-y-0 transition-all lg:duration-200">
+                      <div class="absolute top-4 right-20"><button class="w-8 h-8"><svg viewBox="0 09 70 75" fill="none"
+                            xmlns="http://www.w3.org/2000/svg" class="">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M36.8907 13.9082H22.4092L29.6502 21.1369L36.8907 13.9082ZM38.9783 29.5862H53.4598L46.2188 22.3578L38.9783 29.5862ZM37.5012 30.4494L37.4374 61.21L22.0646 30.4494H37.5012ZM38.3658 30.4494L38.3022 61.2084L53.8019 30.4494H38.3658ZM30.2615 21.7473L37.9344 14.087L45.6073 21.7473L37.9344 29.4075L34.0979 25.5774L30.2615 21.7473ZM29.0387 21.7473L21.3655 14.087L13.6924 21.7473L21.3655 29.4073L29.0387 21.7473ZM69.9068 29.5861H55.5472L62.7856 22.3561L69.9068 29.586V29.5861ZM5.83789 30.4494L36.2928 60.8534L21.0979 30.4494H5.83789ZM62.1765 21.7429L54.5033 29.4074L46.8304 21.7474L54.5036 14.0869L62.1765 21.7429ZM36.8907 29.5862L31.7705 24.4747L29.6502 22.3578L22.4092 29.5862H36.8907ZM5.84028 29.5861L13.0811 22.3578L20.3216 29.5861H5.84028ZM53.4598 13.9082H38.9783L46.219 21.1369L53.4598 13.9082ZM39.4592 60.8338L54.77 30.4495H69.8946L47.2465 53.0593L39.4592 60.8338Z"
+                              class="none" stroke="#1c1794"></path>
+                          </svg></button></div><button
+                        class="text-theme-blue block absolute left-5 focus:outline-none"><svg
+                          class="h-6 w-6 4xl:h-10 4xl:w-10 text-theme-blue" viewBox="0 0 78 78" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <g id="Icons/misc/Heart/Outline">
+                            <path id="Mask" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M62.7758 7.74005C53.7123 4.06519 44.23 7.28152 38.2535 15.9344C32.2761 7.28152 22.7938 4.06233 13.7293 7.74005C5.22935 11.188 -2.46076 21.2384 0.742173 35.157C6.2625 59.1623 36.6032 71.6883 37.8922 72.2097C38.0082 72.2564 38.1309 72.2803 38.2535 72.2803C38.3762 72.2803 38.4989 72.2574 38.6148 72.2097C39.9039 71.6883 70.2417 59.1623 75.7649 35.157C78.9669 21.2384 71.2767 11.188 62.7758 7.74005ZM72.4773 34.9102C67.6903 55.7105 41.5819 67.6131 38.2535 69.0528C34.9242 67.6149 8.81577 55.7251 4.02972 34.9102C1.19453 22.5875 7.93696 13.7164 15.4008 10.6895C17.6627 9.77148 19.8289 9.36874 21.8737 9.36874C28.8682 9.36874 34.4291 14.0844 37.4686 19.0215C37.8026 19.5643 38.7026 19.5643 39.0385 19.0215C42.965 12.6428 51.0997 6.63291 61.1043 10.6895C68.5692 13.7164 75.3116 22.5875 72.4773 34.9102Z"
+                              class="fill-current"></path>
+                          </g>
+                        </svg></button>
+                    </div>
+                  </nav>
+                  <header class="font-serif absolute top-4 left-4">
+                    <h3 class="text-lg leading-tight">1.04 ct Cushion Very Good</h3>
+                    <h3
+                      class="text-sm mt-1 leading-tight transform lg:opacity-0 lg:group-hover:opacity-100 lg:-translate-y-full lg:group-hover:translate-y-0 transition-all lg:duration-200 ">
+                      J VVS2Lab Diamond</h3>
+                  </header><a target="_blank" rel="noreferrer" href="/diamonds/diamond-M20238FD?"
+                    class="w-full h-[380px] relative z-10 flex flex-col justify-between"
+                    style="transition-delay: 100ms;">
+                    <div
+                      class="absolute right-4 bottom-4 flex flex-col ld:transition-opacity lg:duration-200 lg:opacity-0 lg:group-hover:opacity-100 text-right  leading-6 text-theme-blue 3xl:text-2xl 4xl:text-3xl">
+                      <h4 class="text-lg">Diamond Price</h4>
+                      <h4 class="text-lg">$2048.40</h4>
+                    </div>
+                  </a>
+                </article>
+              </div>
+            </li>
+            <li class="relative z-20 w-full overflow-hidden animate-appearRight sm:w-1/2 md:w-1/3 lg:w-1/4"
+              style="transition-delay: 25ms; mask-image: -webkit-radial-gradient(center, white, black);">
+              <div class="group w-full relative border-theme-blue text-theme-blue overflow-hidden group bg-[#ecefe9]"
+                style="padding-bottom: 100%;">
+                <div class="absolute bottom-0 left-0 right-0 z-10 w-full h-px bg-theme-blue"></div>
+                <div class="absolute top-0 bottom-0 right-0 z-10 w-px h-full bg-theme-blue"></div>
+                <article
+                  class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center w-full h-full p-4 text-theme-blue">
+                  <figure
+                    class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center w-full h-full animate-appearRight"
+                    style="transition-delay: 25ms;"><img
+                      class="relative block w-1/2 transition-all duration-300 ease-in transform group-hover:scale-110"
+                      src="/assets/images/diamond-selector/diamonds/cushion.webp" alt="100757180310KD"></figure>
+                  <nav class="absolute top-0 w-full flex flex-row-reverse z-20">
+                    <div
+                      class="w-24 4xl:w-32 pt-5 pr-6 -right-10 relative flex flex-row justify-between
+           lg:transform lg:opacity-0 lg:group-hover:opacity-100 lg:-translate-y-full lg:group-hover:translate-y-0 transition-all lg:duration-200">
+                      <div class="absolute top-4 right-20"><button class="w-8 h-8"><svg viewBox="0 09 70 75" fill="none"
+                            xmlns="http://www.w3.org/2000/svg" class="">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M36.8907 13.9082H22.4092L29.6502 21.1369L36.8907 13.9082ZM38.9783 29.5862H53.4598L46.2188 22.3578L38.9783 29.5862ZM37.5012 30.4494L37.4374 61.21L22.0646 30.4494H37.5012ZM38.3658 30.4494L38.3022 61.2084L53.8019 30.4494H38.3658ZM30.2615 21.7473L37.9344 14.087L45.6073 21.7473L37.9344 29.4075L34.0979 25.5774L30.2615 21.7473ZM29.0387 21.7473L21.3655 14.087L13.6924 21.7473L21.3655 29.4073L29.0387 21.7473ZM69.9068 29.5861H55.5472L62.7856 22.3561L69.9068 29.586V29.5861ZM5.83789 30.4494L36.2928 60.8534L21.0979 30.4494H5.83789ZM62.1765 21.7429L54.5033 29.4074L46.8304 21.7474L54.5036 14.0869L62.1765 21.7429ZM36.8907 29.5862L31.7705 24.4747L29.6502 22.3578L22.4092 29.5862H36.8907ZM5.84028 29.5861L13.0811 22.3578L20.3216 29.5861H5.84028ZM53.4598 13.9082H38.9783L46.219 21.1369L53.4598 13.9082ZM39.4592 60.8338L54.77 30.4495H69.8946L47.2465 53.0593L39.4592 60.8338Z"
+                              class="none" stroke="#1c1794"></path>
+                          </svg></button></div><button
+                        class="text-theme-blue block absolute left-5 focus:outline-none"><svg
+                          class="h-6 w-6 4xl:h-10 4xl:w-10 text-theme-blue" viewBox="0 0 78 78" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <g id="Icons/misc/Heart/Outline">
+                            <path id="Mask" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M62.7758 7.74005C53.7123 4.06519 44.23 7.28152 38.2535 15.9344C32.2761 7.28152 22.7938 4.06233 13.7293 7.74005C5.22935 11.188 -2.46076 21.2384 0.742173 35.157C6.2625 59.1623 36.6032 71.6883 37.8922 72.2097C38.0082 72.2564 38.1309 72.2803 38.2535 72.2803C38.3762 72.2803 38.4989 72.2574 38.6148 72.2097C39.9039 71.6883 70.2417 59.1623 75.7649 35.157C78.9669 21.2384 71.2767 11.188 62.7758 7.74005ZM72.4773 34.9102C67.6903 55.7105 41.5819 67.6131 38.2535 69.0528C34.9242 67.6149 8.81577 55.7251 4.02972 34.9102C1.19453 22.5875 7.93696 13.7164 15.4008 10.6895C17.6627 9.77148 19.8289 9.36874 21.8737 9.36874C28.8682 9.36874 34.4291 14.0844 37.4686 19.0215C37.8026 19.5643 38.7026 19.5643 39.0385 19.0215C42.965 12.6428 51.0997 6.63291 61.1043 10.6895C68.5692 13.7164 75.3116 22.5875 72.4773 34.9102Z"
+                              class="fill-current"></path>
+                          </g>
+                        </svg></button>
+                    </div>
+                  </nav>
+                  <header class="font-serif absolute top-4 left-4">
+                    <h3 class="text-lg leading-tight">3.74 ct Cushion Super Ideal</h3>
+                    <h3
+                      class="text-sm mt-1 leading-tight transform lg:opacity-0 lg:group-hover:opacity-100 lg:-translate-y-full lg:group-hover:translate-y-0 transition-all lg:duration-200 ">
+                      H VS2Lab Diamond</h3>
+                  </header><a target="_blank" rel="noreferrer" href="/diamonds/diamond-100757180310KD?"
+                    class="w-full h-[380px] relative z-10 flex flex-col justify-between"
+                    style="transition-delay: 125ms;">
+                    <div
+                      class="absolute right-4 bottom-4 flex flex-col ld:transition-opacity lg:duration-200 lg:opacity-0 lg:group-hover:opacity-100 text-right  leading-6 text-theme-blue 3xl:text-2xl 4xl:text-3xl">
+                      <h4 class="text-lg">Diamond Price</h4>
+                      <h4 class="text-lg">$1466.88</h4>
+                    </div>
+                  </a>
+                </article>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <section>
+          <div class="bg-theme-blue pt-12 pb-8 md:py-9 xl:py-16 text-white items-center flex flex-col overflow-hidden">
+            <h2
+              class="text-center uppercase leading-none font-sans mb-4 xl:mb-0 text-4xl sm:text-3xl lg:text-4xl xl:text-6xl 2xl:text-6xl 3xl:text-8xl 4xl:text-9xl  ">
+              How It Works</h2>
+            <p
+              class="text-sm 3xl:text-2xl text-center font-serif sm:text-lg leading-tight sm:leading-6 uppercase md:w-1/2 xl:w-full">
+              NOT ALL DIFFICULT DECISIONS NEED TO BE COMPLICATED, DARLING.</p>
+            <div class="hidden md:flex w-full justify-between mt-3 lg:mt-10 md:w-5/6 xl:px-6">
+              <div class="flex md:w-1/3 lg:w-vw-3/12 xl:w-3/12">
+                <div class="border bg-theme-blue text-white h-full">
+                  <div class="border-b flex justify-center items-center w-full relative" style="padding-bottom: 100%;">
+                    <div class="carousel-root flex items-center absolute inset-0 w-full flex-shrink-0">
+                      <div class="carousel carousel-slider" style="width: 100%;"><button type="button"
+                          aria-label="previous slide / item"
+                          class="control-arrow control-prev control-disabled"></button>
+                        <div class="slider-wrapper axis-horizontal" style="height: 255px;">
+                          <ul class="slider animated"
+                            style="transform: translate3d(-100%, 0px, 0px); transition-duration: 0ms;">
+                            <li class="slide previous"><img layout="fill" class="w-full h-full"
+                                src="/assets/images/how-it-works/3/1.svg" alt="DESIGN YOUR DREAM RING" loading="lazy"
+                                style="max-width: calc(100% - 60px);"></li>
+                            <li class="slide selected"><img layout="fill" class="w-full h-full"
+                                src="/assets/images/how-it-works/3/3.svg" alt="DESIGN YOUR DREAM RING" loading="lazy"
+                                style="max-width: calc(100% - 60px);"></li>
+                            <li class="slide"><img layout="fill" class="w-full h-full"
+                                src="/assets/images/how-it-works/3/2.svg" alt="DESIGN YOUR DREAM RING" loading="lazy"
+                                style="max-width: calc(100% - 60px);"></li>
+                            <li class="slide previous"><img layout="fill" class="w-full h-full"
+                                src="/assets/images/how-it-works/3/1.svg" alt="DESIGN YOUR DREAM RING" loading="lazy"
+                                style="max-width: calc(100% - 60px);"></li>
+                            <li class="slide selected"><img layout="fill" class="w-full h-full"
+                                src="/assets/images/how-it-works/3/3.svg" alt="DESIGN YOUR DREAM RING" loading="lazy"
+                                style="max-width: calc(100% - 60px);"></li>
+                          </ul>
+                        </div><button type="button" aria-label="next slide / item"
+                          class="control-arrow control-next control-disabled"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-8 md:p-4 lg:p-8 font-serif items-start flex flex-col">
+                    <p class="text-2xl md:text-lg leading-7 md:leading-6 uppercase 3xl:text-2xl 4xl:text-3xl text-left">
+                      01.<br>DESIGN YOUR DREAM RING</p>
+                    <p class="my-8 sm:mt-3 mb-8 text-lg leading-6 3xl:text-2xl 4xl:text-3xl text-left">Take the quiz to
+                      get a free sketch of your dream ring from our design team in NYC. Sketches are always free, and
+                      there's no limit.</p><a href="https://frankdarling.typeform.com/to/SwTTd2#source=site?"
+                      class="text-lg leading-6 uppercase 3xl:text-2xl 4xl:text-3xl"><span class="underline">TAKE THE
+                        QUIZ</span></a>
+                  </div>
+                </div>
+              </div>
+              <div class="flex md:w-1/3 lg:w-vw-3/12 xl:w-3/12">
+                <div class="border bg-theme-blue text-white h-full">
+                  <div class="border-b flex justify-center items-center w-full relative" style="padding-bottom: 100%;">
+                    <div class="carousel-root flex items-center absolute inset-0 w-full flex-shrink-0">
+                      <div class="carousel carousel-slider" style="width: 100%;"><button type="button"
+                          aria-label="previous slide / item"
+                          class="control-arrow control-prev control-disabled"></button>
+                        <div class="slider-wrapper axis-horizontal" style="height: 255px;">
+                          <ul class="slider animated"
+                            style="transform: translate3d(-200%, 0px, 0px); transition-duration: 0ms;">
+                            <li class="slide selected"><img layout="fill" class="w-full h-full"
+                                src="/assets/images/how-it-works/2/2.svg" alt="PREVIEW AT HOME" loading="lazy"
+                                style="max-width: calc(100% - 60px);"></li>
+                            <li class="slide previous"><img layout="fill" class="w-full h-full"
+                                src="/assets/images/how-it-works/2/1.svg" alt="PREVIEW AT HOME" loading="lazy"
+                                style="max-width: calc(100% - 60px);"></li>
+                            <li class="slide selected"><img layout="fill" class="w-full h-full"
+                                src="/assets/images/how-it-works/2/2.svg" alt="PREVIEW AT HOME" loading="lazy"
+                                style="max-width: calc(100% - 60px);"></li>
+                            <li class="slide previous"><img layout="fill" class="w-full h-full"
+                                src="/assets/images/how-it-works/2/1.svg" alt="PREVIEW AT HOME" loading="lazy"
+                                style="max-width: calc(100% - 60px);"></li>
+                          </ul>
+                        </div><button type="button" aria-label="next slide / item"
+                          class="control-arrow control-next control-disabled"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-8 md:p-4 lg:p-8 font-serif items-start flex flex-col">
+                    <p class="text-2xl md:text-lg leading-7 md:leading-6 uppercase 3xl:text-2xl 4xl:text-3xl text-left">
+                      02.<br>PREVIEW AT HOME</p>
+                    <p class="my-8 sm:mt-3 mb-8 text-lg leading-6 3xl:text-2xl 4xl:text-3xl text-left">Get our free try
+                      at home kit and compare 💎 shapes, stone sizes and setting features at home, with your partner.
+                    </p><a href="/try-at-home?" class="text-lg leading-6 uppercase 3xl:text-2xl 4xl:text-3xl"><span
+                        class="underline">GET THE KIT</span></a>
+                  </div>
+                </div>
+              </div>
+              <div class="flex md:w-1/3 lg:w-vw-3/12 xl:w-3/12">
+                <div class="border bg-theme-blue text-white h-full">
+                  <div class="border-b flex justify-center items-center w-full relative" style="padding-bottom: 100%;">
+                    <div class="carousel-root flex items-center absolute inset-0 w-full flex-shrink-0">
+                      <div class="carousel carousel-slider" style="width: 100%;"><button type="button"
+                          aria-label="previous slide / item"
+                          class="control-arrow control-prev control-disabled"></button>
+                        <div class="slider-wrapper axis-horizontal" style="height: 255px;">
+                          <ul class="slider animated"
+                            style="transform: translate3d(-100%, 0px, 0px); transition-duration: 0ms;">
+                            <li class="slide previous"><img layout="fill" class="w-full h-full"
+                                src="/assets/images/how-it-works/1/2.svg" alt="SELECT YOUR STONE" loading="lazy"
+                                style="max-width: calc(100% - 60px);"></li>
+                            <li class="slide selected"><img layout="fill" class="w-full h-full"
+                                src="/assets/images/how-it-works/1/1.svg" alt="SELECT YOUR STONE" loading="lazy"
+                                style="max-width: calc(100% - 60px);"></li>
+                            <li class="slide previous"><img layout="fill" class="w-full h-full"
+                                src="/assets/images/how-it-works/1/2.svg" alt="SELECT YOUR STONE" loading="lazy"
+                                style="max-width: calc(100% - 60px);"></li>
+                            <li class="slide selected"><img layout="fill" class="w-full h-full"
+                                src="/assets/images/how-it-works/1/1.svg" alt="SELECT YOUR STONE" loading="lazy"
+                                style="max-width: calc(100% - 60px);"></li>
+                          </ul>
+                        </div><button type="button" aria-label="next slide / item"
+                          class="control-arrow control-next control-disabled"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-8 md:p-4 lg:p-8 font-serif items-start flex flex-col">
+                    <p class="text-2xl md:text-lg leading-7 md:leading-6 uppercase 3xl:text-2xl 4xl:text-3xl text-left">
+                      03.<br>SELECT YOUR STONE</p>
+                    <p class="my-8 sm:mt-3 mb-8 text-lg leading-6 3xl:text-2xl 4xl:text-3xl text-left">Choose from over
+                      20,000 certified, ethically sourced natural and lab grown diamonds. Or, let us curate a selection
+                      just for you</p><a href="/diamonds?"
+                      class="text-lg leading-6 uppercase 3xl:text-2xl 4xl:text-3xl"><span class="underline">BROWSE
+                        DIAMONDS</span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex md:hidden">
+              <div class="flex flex-col">
+                <div>
+                  <div class="w-full overflow-hidden">
+                    <div class="flex" style="transition: transform 1s; transform: translateX(calc(-100% - 20px));">
+                      <div style="flex: 1 0 100%; margin-right: 20px; order: 1;">
+                        <div class="flex w-vw-10/12 mx-auto mt-4 mb-8">
+                          <div class="border bg-theme-blue text-white h-full">
+                            <div class="border-b flex justify-center items-center w-full relative"
+                              style="padding-bottom: 100%;">
+                              <div class="carousel-root flex items-center absolute inset-0 w-full flex-shrink-0">
+                                <div class="carousel carousel-slider" style="width: 100%;"><button type="button"
+                                    aria-label="previous slide / item"
+                                    class="control-arrow control-prev control-disabled"></button>
+                                  <div class="slider-wrapper axis-horizontal" style="height: auto;">
+                                    <ul class="slider animated"
+                                      style="transform: translate3d(-300%, 0px, 0px); transition-duration: 0ms;">
+                                      <li class="slide selected"><img layout="fill" class="w-full h-full"
+                                          src="/assets/images/how-it-works/3/1.svg" alt="DESIGN YOUR DREAM RING"
+                                          loading="lazy" style="max-width: calc(100% - 60px);"></li>
+                                      <li class="slide"><img layout="fill" class="w-full h-full"
+                                          src="/assets/images/how-it-works/3/3.svg" alt="DESIGN YOUR DREAM RING"
+                                          loading="lazy" style="max-width: calc(100% - 60px);"></li>
+                                      <li class="slide previous"><img layout="fill" class="w-full h-full"
+                                          src="/assets/images/how-it-works/3/2.svg" alt="DESIGN YOUR DREAM RING"
+                                          loading="lazy" style="max-width: calc(100% - 60px);"></li>
+                                      <li class="slide selected"><img layout="fill" class="w-full h-full"
+                                          src="/assets/images/how-it-works/3/1.svg" alt="DESIGN YOUR DREAM RING"
+                                          loading="lazy" style="max-width: calc(100% - 60px);"></li>
+                                      <li class="slide"><img layout="fill" class="w-full h-full"
+                                          src="/assets/images/how-it-works/3/3.svg" alt="DESIGN YOUR DREAM RING"
+                                          loading="lazy" style="max-width: calc(100% - 60px);"></li>
+                                    </ul>
+                                  </div><button type="button" aria-label="next slide / item"
+                                    class="control-arrow control-next control-disabled"></button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="p-8 md:p-4 lg:p-8 font-serif items-start flex flex-col">
+                              <p
+                                class="text-2xl md:text-lg leading-7 md:leading-6 uppercase 3xl:text-2xl 4xl:text-3xl text-left">
+                                01.<br>DESIGN YOUR DREAM RING</p>
+                              <p class="my-8 sm:mt-3 mb-8 text-lg leading-6 3xl:text-2xl 4xl:text-3xl text-left">Take
+                                the quiz to get a free sketch of your dream ring from our design team in NYC. Sketches
+                                are always free, and there's no limit.</p><a
+                                href="https://frankdarling.typeform.com/to/SwTTd2#source=site?"
+                                class="text-lg leading-6 uppercase 3xl:text-2xl 4xl:text-3xl"><span
+                                  class="underline">TAKE THE QUIZ</span></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div style="flex: 1 0 100%; margin-right: 20px; order: 2;">
+                        <div class="flex w-vw-10/12 mx-auto mt-4 mb-8">
+                          <div class="border bg-theme-blue text-white h-full">
+                            <div class="border-b flex justify-center items-center w-full relative"
+                              style="padding-bottom: 100%;">
+                              <div class="carousel-root flex items-center absolute inset-0 w-full flex-shrink-0">
+                                <div class="carousel carousel-slider" style="width: 100%;"><button type="button"
+                                    aria-label="previous slide / item"
+                                    class="control-arrow control-prev control-disabled"></button>
+                                  <div class="slider-wrapper axis-horizontal" style="height: auto;">
+                                    <ul class="slider animated"
+                                      style="transform: translate3d(-100%, 0px, 0px); transition-duration: 0ms;">
+                                      <li class="slide previous"><img layout="fill" class="w-full h-full"
+                                          src="/assets/images/how-it-works/2/2.svg" alt="PREVIEW AT HOME" loading="lazy"
+                                          style="max-width: calc(100% - 60px);"></li>
+                                      <li class="slide selected"><img layout="fill" class="w-full h-full"
+                                          src="/assets/images/how-it-works/2/1.svg" alt="PREVIEW AT HOME" loading="lazy"
+                                          style="max-width: calc(100% - 60px);"></li>
+                                      <li class="slide previous"><img layout="fill" class="w-full h-full"
+                                          src="/assets/images/how-it-works/2/2.svg" alt="PREVIEW AT HOME" loading="lazy"
+                                          style="max-width: calc(100% - 60px);"></li>
+                                      <li class="slide selected"><img layout="fill" class="w-full h-full"
+                                          src="/assets/images/how-it-works/2/1.svg" alt="PREVIEW AT HOME" loading="lazy"
+                                          style="max-width: calc(100% - 60px);"></li>
+                                    </ul>
+                                  </div><button type="button" aria-label="next slide / item"
+                                    class="control-arrow control-next control-disabled"></button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="p-8 md:p-4 lg:p-8 font-serif items-start flex flex-col">
+                              <p
+                                class="text-2xl md:text-lg leading-7 md:leading-6 uppercase 3xl:text-2xl 4xl:text-3xl text-left">
+                                02.<br>PREVIEW AT HOME</p>
+                              <p class="my-8 sm:mt-3 mb-8 text-lg leading-6 3xl:text-2xl 4xl:text-3xl text-left">Get our
+                                free try at home kit and compare 💎 shapes, stone sizes and setting features at home,
+                                with your partner.</p><a href="/try-at-home?"
+                                class="text-lg leading-6 uppercase 3xl:text-2xl 4xl:text-3xl"><span
+                                  class="underline">GET THE KIT</span></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div style="flex: 1 0 100%; margin-right: 20px; order: 0;">
+                        <div class="flex w-vw-10/12 mx-auto mt-4 mb-8">
+                          <div class="border bg-theme-blue text-white h-full">
+                            <div class="border-b flex justify-center items-center w-full relative"
+                              style="padding-bottom: 100%;">
+                              <div class="carousel-root flex items-center absolute inset-0 w-full flex-shrink-0">
+                                <div class="carousel carousel-slider" style="width: 100%;"><button type="button"
+                                    aria-label="previous slide / item"
+                                    class="control-arrow control-prev control-disabled"></button>
+                                  <div class="slider-wrapper axis-horizontal" style="height: auto;">
+                                    <ul class="slider animated"
+                                      style="transform: translate3d(-100%, 0px, 0px); transition-duration: 0ms;">
+                                      <li class="slide previous"><img layout="fill" class="w-full h-full"
+                                          src="/assets/images/how-it-works/1/2.svg" alt="SELECT YOUR STONE"
+                                          loading="lazy" style="max-width: calc(100% - 60px);"></li>
+                                      <li class="slide selected"><img layout="fill" class="w-full h-full"
+                                          src="/assets/images/how-it-works/1/1.svg" alt="SELECT YOUR STONE"
+                                          loading="lazy" style="max-width: calc(100% - 60px);"></li>
+                                      <li class="slide previous"><img layout="fill" class="w-full h-full"
+                                          src="/assets/images/how-it-works/1/2.svg" alt="SELECT YOUR STONE"
+                                          loading="lazy" style="max-width: calc(100% - 60px);"></li>
+                                      <li class="slide selected"><img layout="fill" class="w-full h-full"
+                                          src="/assets/images/how-it-works/1/1.svg" alt="SELECT YOUR STONE"
+                                          loading="lazy" style="max-width: calc(100% - 60px);"></li>
+                                    </ul>
+                                  </div><button type="button" aria-label="next slide / item"
+                                    class="control-arrow control-next control-disabled"></button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="p-8 md:p-4 lg:p-8 font-serif items-start flex flex-col">
+                              <p
+                                class="text-2xl md:text-lg leading-7 md:leading-6 uppercase 3xl:text-2xl 4xl:text-3xl text-left">
+                                03.<br>SELECT YOUR STONE</p>
+                              <p class="my-8 sm:mt-3 mb-8 text-lg leading-6 3xl:text-2xl 4xl:text-3xl text-left">Choose
+                                from over 20,000 certified, ethically sourced natural and lab grown diamonds. Or, let us
+                                curate a selection just for you</p><a href="/diamonds?"
+                                class="text-lg leading-6 uppercase 3xl:text-2xl 4xl:text-3xl"><span
+                                  class="underline">BROWSE DIAMONDS</span></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <li class="inline-block h-2.5 w-2.5 rounded-full bg-white border border-white mx-1.5 md:hidden lg:hidden"
+                aria-label="Selected: 1" title="Selected: 1"></li>
+              <li
+                class="inline-block h-2.5 w-2.5 rounded-full bg-theme-blue border border-white mx-1.5 md:hidden lg:hidden"
+                value="1" role="button" tabindex="0" title="2" aria-label="2"></li>
+              <li
+                class="inline-block h-2.5 w-2.5 rounded-full bg-theme-blue border border-white mx-1.5 md:hidden lg:hidden"
+                value="2" role="button" tabindex="0" title="3" aria-label="3"></li>
+            </div>
+          </div>
+          <div class="w-full bg-black lg:h-vw-5/12 relative lg:block flex flex-col">
+            <div class="hidden lg:block absolute top-0 bottom-0 -ml-1 bg-white z-10"
+              style="left: 50.05%; width: 1px; transform: rotate(0deg);"></div>
+            <div class="block lg:hidden absolute left-0 bottom-0 right-0 bg-white z-20 top-1/2"
+              style="height: 1px; transform: rotate(1.25deg);"></div>
+            <div class="react-parallax h-full" style="position: relative; overflow: hidden;">
+              <div
+                class="lg:absolute lg:left-0 lg:top-0 lg:bottom-0 h-vw-extended lg:h-auto w-full right-0 bg-black flex lg:flex-row flex-col cursor-pointer false items-center lg:transform-none-for-sure"
+                style="transform: translate3d(0px, -0.0051331vw, 0px);">
+                <div class="flex flex-row lg:w-1/3 w-full h-full">
+                  <div class="flex flex-col text-white text-center items-center justify-center flex-1">
+                    <h2
+                      class="font-sans-serif uppercase text-4xl leading-none md:text-6xl lg:text-4/5xl lg:leading-none 3xl:text-6xl 4xl:text-8xl">
+                      Create</h2>
+                    <h2
+                      class="font-serif uppercase text-4xl leading-none md:text-6xl lg:text-4/5xl lg:leading-none 3xl:text-6xl 4xl:text-8xl">
+                      The perfect<br>Ring</h2><a href="/try-at-home/?" target="" rel="" class="block ">
+                      <div
+                        class="relative inline-display no-overflow  animated-link after:bg-white cursor-pointer mt-vw-4 lg:text-lg text-sm">
+                        <div
+                          class="font-sans-serif tracking-wide leading-relaxed text-center uppercase text-white text-sm lg:text-lg">
+                          Start Now</div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div
+                  class="flex flex-row w-full mt-16 lg:mt-0 lg:w-1/3 h-full items-center justify-center pointer-events-none">
+                  <div class="w-vw-8/12 lg:w-vw-1/4 lg:h-vw-1/4 relative transtion-all duration-300 top-0 lg:top-0"
+                    style="transform: scale(1);"><img alt="ring" loading="lazy" width="1" height="1" decoding="async"
+                      data-nimg="1" sizes="100vw"
+                      srcset="/assets/images/concierge/link_ring.webp 640w, /assets/images/concierge/link_ring.webp 750w, /assets/images/concierge/link_ring.webp 828w, /assets/images/concierge/link_ring.webp 1080w, /assets/images/concierge/link_ring.webp 1200w, /assets/images/concierge/link_ring.webp 1920w, /assets/images/concierge/link_ring.webp 2048w, /assets/images/concierge/link_ring.webp 3840w"
+                      src="/assets/images/concierge/link_ring.webp"
+                      style="color: transparent; width: 100%; height: auto;"></div>
+                </div>
+              </div>
+              <div class="react-parallax-content" style="position: relative;"></div>
+            </div>
+            <div class="react-parallax h-full lg:hidden" style="position: relative; overflow: hidden;">
+              <div
+                class="lg:absolute lg:left-0 lg:top-0 lg:bottom-0 h-vw-extended lg:h-auto w-full right-0 bg-black flex lg:flex-row-reverse flex-col-reverse cursor-pointer false items-center lg:transform-none-for-sure sm:no-clip"
+                style="transform: translate3d(0px, -45.0066vw, 0px); clip-path: polygon(100% 100%, 100% 0%, calc(50% - 3px) 0%, calc(50% - 3px) 100%);">
+                <div class="flex flex-row lg:w-1/3 w-full h-full">
+                  <div class="flex flex-col text-white text-center items-center justify-center flex-1">
+                    <h2
+                      class="font-sans-serif uppercase text-4xl leading-none md:text-6xl lg:text-4/5xl lg:leading-none 3xl:text-6xl 4xl:text-8xl">
+                      Discover</h2>
+                    <h2
+                      class="font-serif uppercase mt-1 text-4xl leading-none md:text-6xl lg:text-4/5xl lg:leading-none 3xl:text-6xl 4xl:text-8xl">
+                      the perfect<br>diamond</h2><a href="/diamonds?" target="" rel="" class="block ">
+                      <div
+                        class="relative inline-display no-overflow  animated-link after:bg-white cursor-pointer mt-vw-4 lg:text-lg text-sm">
+                        <div
+                          class="font-sans-serif tracking-wide leading-relaxed text-center uppercase text-white text-sm lg:text-lg">
+                          Start Now</div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="flex flex-row w-full lg:w-1/3 h-full items-center justify-center pointer-events-none">
+                  <div class="relative w-vw-1/2 lg:w-vw-1/6 transtion-all duration-300 -top-16 lg:top-0"
+                    style="transform: scale(1);"><img alt="diamond" loading="lazy" width="1" height="1" decoding="async"
+                      data-nimg="1" sizes="100vw"
+                      srcset="/assets/images/concierge/link_diamond.webp 640w, /assets/images/concierge/link_diamond.webp 750w, /assets/images/concierge/link_diamond.webp 828w, /assets/images/concierge/link_diamond.webp 1080w, /assets/images/concierge/link_diamond.webp 1200w, /assets/images/concierge/link_diamond.webp 1920w, /assets/images/concierge/link_diamond.webp 2048w, /assets/images/concierge/link_diamond.webp 3840w"
+                      src="/assets/images/concierge/link_diamond.webp"
+                      style="color: transparent; width: 100%; height: auto;"></div>
+                </div>
+              </div>
+              <div class="react-parallax-content" style="position: relative;"></div>
+            </div>
+            <div class="hidden lg:block">
+              <div
+                class="lg:absolute lg:left-0 lg:top-0 lg:bottom-0 h-vw-extended lg:h-auto w-full right-0 bg-black flex lg:flex-row-reverse flex-col-reverse cursor-pointer false items-center lg:transform-none-for-sure sm:no-clip"
+                style="transform: translate3d(0px, -45vw, 0px); clip-path: polygon(100% 100%, 100% 0%, calc(50% - 3px) 0%, calc(50% - 3px) 100%);">
+                <div class="flex flex-row lg:w-1/3 w-full h-full">
+                  <div class="flex flex-col text-white text-center items-center justify-center flex-1">
+                    <h2
+                      class="font-sans-serif uppercase text-4xl leading-none md:text-6xl lg:text-4/5xl lg:leading-none 3xl:text-6xl 4xl:text-8xl">
+                      Discover</h2>
+                    <h2
+                      class="font-serif uppercase mt-1 text-4xl leading-none md:text-6xl lg:text-4/5xl lg:leading-none 3xl:text-6xl 4xl:text-8xl">
+                      the perfect<br>diamond</h2><a href="/diamonds?" target="" rel="" class="block ">
+                      <div
+                        class="relative inline-display no-overflow  animated-link after:bg-white cursor-pointer mt-vw-4 lg:text-lg text-sm">
+                        <div
+                          class="font-sans-serif tracking-wide leading-relaxed text-center uppercase text-white text-sm lg:text-lg">
+                          Start Now</div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="flex flex-row w-full lg:w-1/3 h-full items-center justify-center pointer-events-none">
+                  <div class="relative w-vw-1/2 lg:w-vw-1/6 transtion-all duration-300 -top-16 lg:top-0"
+                    style="transform: scale(1);"><img alt="diamond" loading="lazy" width="1" height="1" decoding="async"
+                      data-nimg="1" sizes="100vw"
+                      srcset="/assets/images/concierge/link_diamond.webp 640w, /assets/images/concierge/link_diamond.webp 750w, /assets/images/concierge/link_diamond.webp 828w, /assets/images/concierge/link_diamond.webp 1080w, /assets/images/concierge/link_diamond.webp 1200w, /assets/images/concierge/link_diamond.webp 1920w, /assets/images/concierge/link_diamond.webp 2048w, /assets/images/concierge/link_diamond.webp 3840w"
+                      src="/assets/images/concierge/link_diamond.webp"
+                      style="color: transparent; width: 100%; height: auto;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <section id="newsletter"
+            class="pb-12 flex flex-col border-t border-theme-blue text-theme-blue bg-white items-center relative">
+            <div class="w-5/6 xl:w-full max-w-3xl 3xl:max-w-4xl 4xl:max-w-6xl flex flex-col justify-center py-8">
+              <h2
+                class="leading-tight 2xl:leading-none text-lg md:text-2xl 3xl:text-3xl 4xl:text-4/5xl font-serif uppercase">
+                In love? Darling, you need all the help<br class="hidden md:block"> you can get.</h2>
+              <h3
+                class="xl:-mt-8 2xl:-mt-6 3xl:-mt-10 text-lg md:text-2xl 3xl:text-3xl 4xl:text-4/5xl leading-tight 2xl:leading-none font-sans text-right uppercase">
+                Sign up for practical advice on the<br class="hidden md:block"> irrational matters of the heart.</h3>
+            </div>
+            <div class="w-5/6 xl:w-full max-w-3xl 3xl:max-w-4xl 4xl:max-w-6xl">
+              <form>
+                <div class="flex relative opacity-100"><input type="email" name="email" placeholder="enter your email"
+                    class="flex-1 disabled:bg-gray-300 appearance-none placeholder-theme-blue text-theme-blue uppercase pl-3 py-0.5 text-lg 3xl:text-2xl 4xl:text-3xl focus:outline-none focus:ring-0 outline-none md:text-xl h-12 border border-theme-blue focus:border-theme-blue leading-none"
+                    value=""><img src="/assets/images/newsletter/arrow.svg" alt="Submit newsletter"
+                    class="absolute right-3 w-12 h-12 top-0 z-10 cursor-pointer"></div>
+                <p class="text-xs leading-none mt-3 opacity-0"></p>
+                <p class="text-xs leading-none mt-3 text-theme-blue opacity-100">Frank Darling doesn't spam, and neither
+                  should you.</p>
+              </form>
+            </div>
+            <div
+              class="absolute inset-0 bg-white flex flex-col justify-center items-center z-10 font-sans pointer-events-none scale-95 transform duration-300 ease-in-out opacity-0">
+              <h2 class="leading-tight 2xl:leading-none text-lg md:text-2xl uppercase mb-6">Confirmed</h2>
+              <h3 class="leading-tight 2xl:leading-none text-lg md:text-2xl">Thank you Darling, we’ll be in touch.</h3>
+            </div>
+          </section>
+        </section>
+      </div>
+    </main>
+    <div class="w-full">
+      <footer class="bg-midnight-blue text-white pt-5 px-4 lg:pt-20 lg:pb-6 lg:px-24 xl:px-40 h-full">
+        <div class="w-full flex flex-col lg:flex-row lg:justify-between space-y-32 lg:space-y-0">
+          <section id="newsletter" class=" flex flex-col text-white bg-midnight-blue relative w-full lg:w-vw-1/3">
+            <h2 class="text-3xl lg:text-4xl xl:text-5xl leading-9 lg:leading-[48px] font-serif pb-28 lg:pb-32"><span
+                class="font-sans">Sign up</span> for practical advice on the irrational matters of the heart.</h2>
+            <div class="w-full">
+              <form>
+                <div class="flex relative opacity-100"><input type="email" name="email" aria-label="Email address"
+                    aria-required="true" placeholder="Email*"
+                    class="flex-1 appearance-none placeholder-white text-white px-0 py-0.5 text-base focus:outline-none focus:ring-0 outline-none h-12 border-b border-white focus:border-white border-0 w-full bg-midnight-blue"
+                    value="">
+                  <div class="absolute right-0 top-1/3 z-10 cursor-pointer" tabindex="0" role="button"
+                    aria-label="Submit newsletter form"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="11"
+                      fill="none" viewBox="0 0 16 11" class="w-5 h-4">
+                      <path id="Vector" fill="#ffffff"
+                        d="M0 5.87h13.984l-4.15 4.476h1.54l4.553-4.995L11.374.346h-1.54l4.15 4.475H0z"></path>
+                    </svg></div>
+                </div>
+                <p class="text-s my-4 text-red-500 hidden"></p>
+                <p class="text-s my-4 block">Frank Darling doesn't spam, and neither should you.</p><button
+                  type="submit"
+                  class="px-3 py-2 lg:px-4 lg:py-3 text-white text-sm lg:text-base focus:outline-none border border-white mt-4">Subscribe!</button>
+              </form>
+            </div>
+          </section>
+          <div class="flex flex-col lg:flex-row text-sm w-full lg:w-vw-5/12 xl:w-vw-4/12 lg:justify-between">
+            <div>
+              <div class="hidden lg:block">
+                <h3 class="font-semibold mb-6 text-sm">About Us</h3>
+                <ul class="font-normal list-none flex flex-col gap-2">
+                  <li class="max-w-fit"><a class="block" href="/about/?">Our Story</a></li>
+                  <li class="max-w-fit"><a class="block" href="/contact/?scroll_target=the-custom-design-process">Custom
+                      Design Process</a></li>
+                  <li class="max-w-fit"><a class="block" href="/rings/?">Design Your Dream Ring</a></li>
+                  <li class="max-w-fit"><a class="block" href="/try-at-home/?">Try At Home</a></li>
+                  <li class="max-w-fit"><a class="block" href="/etiquette/?">Education</a></li>
+                  <li class="max-w-fit"><a class="block" href="/terms-of-service/?">Terms of Use</a></li>
+                  <li class="max-w-fit"><a class="block" href="/7-reasons-not-to-buy-a-lab-grown-diamond/?">Lab Grown
+                      Diamonds</a></li>
+                </ul>
+              </div>
+              <div class="block lg:hidden">
+                <div
+                  class="block py-4 lg:py-0 border-b-[0.65px] border-white lg:pl-0 lg:pr-7 xl:pr-10 lg:border-none flex-1 text-sm "
+                  links="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"
+                  role="region" aria-label="Accordion section"><button type="button" class="w-full focus:outline-none"
+                    aria-expanded="false" aria-controls="content-accordion-r61zt6q9l" id="accordion-r61zt6q9l"><button
+                      class="w-full text-white text-xs lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 flex flex-row justify-between uppercase items-center cursor-pointer focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50"
+                      aria-expanded="false"><span class="text-left whitespace-nowrap">About Us</span>
+                      <div class="text-theme-blue relative w-3 lg:w-4" aria-hidden="true"><span
+                          class="absolute w-full border-white left-0 border-0.5"></span><span
+                          class="absolute w-full border-0.5 border-white transition-all duration-300 left-0 rotate-90"></span>
+                      </div>
+                    </button></button>
+                  <div id="content-accordion-r61zt6q9l" class="relative overflow-hidden transition-all duration-500"
+                    role="region" aria-labelledby="accordion-r61zt6q9l" aria-hidden="true" data-collapsed="true"
+                    style="height: 0px;">
+                    <ul class="3xl:pb-0 space-y-2 lg:space-y-0 pt-3" role="menu">
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Our Story" href="/about/?">Our Story</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Custom Design Process"
+                          href="/contact/?scroll_target=the-custom-design-process">Custom Design Process</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Design Your Dream Ring" href="/rings/?">Design Your Dream Ring</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Try At Home" href="/try-at-home/?">Try At Home</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Education" href="/etiquette/?">Education</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Terms of Use" href="/terms-of-service/?">Terms of Use</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Lab Grown Diamonds" href="/7-reasons-not-to-buy-a-lab-grown-diamond/?">Lab Grown
+                          Diamonds</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="hidden lg:block">
+                <h3 class="font-semibold mb-6 text-sm">Customer care</h3>
+                <ul class="font-normal list-none flex flex-col gap-2">
+                  <li class="max-w-fit"><a class="block" href="/contact/?scroll_target=shipping-returns">Free Shipping
+                      &amp; Returns</a></li>
+                  <li class="max-w-fit"><a class="block" href="/contact/?scroll_target=shipping-returns">Free
+                      Returns</a></li>
+                  <li class="max-w-fit"><a class="block" href="/contact/?scroll_target=warranties-repairs">Lifetime
+                      Warranty</a></li>
+                  <li class="max-w-fit"><a class="block" href="/contact/?scroll_target=90-day-free-resizing">90 Day Free
+                      Resizing</a></li>
+                  <li class="max-w-fit"><a class="block" href="/contact/?scroll_target=payment-promotions">Flexible
+                      Payment Options</a></li>
+                  <li class="max-w-fit"><a class="block"
+                      href="/contact/?scroll_target=complimentary-care-plan">Complimentary Care Plan</a></li>
+                  <li class="max-w-fit"><a class="block" href="/contact/?scroll_target=faq">FAQs</a></li>
+                </ul>
+              </div>
+              <div class="block lg:hidden">
+                <div
+                  class="block py-4 lg:py-0 border-b-[0.65px] border-white lg:pl-0 lg:pr-7 xl:pr-10 lg:border-none flex-1 text-sm "
+                  links="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"
+                  role="region" aria-label="Accordion section"><button type="button" class="w-full focus:outline-none"
+                    aria-expanded="false" aria-controls="content-accordion-22y5tyhpj" id="accordion-22y5tyhpj"><button
+                      class="w-full text-white text-xs lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 flex flex-row justify-between uppercase items-center cursor-pointer focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50"
+                      aria-expanded="false"><span class="text-left whitespace-nowrap">Customer care</span>
+                      <div class="text-theme-blue relative w-3 lg:w-4" aria-hidden="true"><span
+                          class="absolute w-full border-white left-0 border-0.5"></span><span
+                          class="absolute w-full border-0.5 border-white transition-all duration-300 left-0 rotate-90"></span>
+                      </div>
+                    </button></button>
+                  <div id="content-accordion-22y5tyhpj" class="relative overflow-hidden transition-all duration-500"
+                    role="region" aria-labelledby="accordion-22y5tyhpj" aria-hidden="true" data-collapsed="true"
+                    style="height: 0px;">
+                    <ul class="3xl:pb-0 space-y-2 lg:space-y-0 pt-3" role="menu">
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Free Shipping &amp; Returns" href="/contact/?scroll_target=shipping-returns">Free
+                          Shipping &amp; Returns</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Free Returns" href="/contact/?scroll_target=shipping-returns">Free Returns</a>
+                      </li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Lifetime Warranty" href="/contact/?scroll_target=warranties-repairs">Lifetime
+                          Warranty</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="90 Day Free Resizing" href="/contact/?scroll_target=90-day-free-resizing">90 Day
+                          Free Resizing</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Flexible Payment Options"
+                          href="/contact/?scroll_target=payment-promotions">Flexible Payment Options</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Complimentary Care Plan"
+                          href="/contact/?scroll_target=complimentary-care-plan">Complimentary Care Plan</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="FAQs" href="/contact/?scroll_target=faq">FAQs</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="hidden lg:block">
+                <h3 class="font-semibold mb-6 text-sm">Shop</h3>
+                <ul class="font-normal list-none flex flex-col gap-2">
+                  <li class="max-w-fit"><a class="block" href="/engagement-rings/?">Engagement Rings</a></li>
+                  <li class="max-w-fit"><a class="block" href="/diamonds/?">Diamonds</a></li>
+                  <li class="max-w-fit"><a class="block" href="/wedding-rings/?">Wedding Bands</a></li>
+                  <li class="max-w-fit"><a class="block" href="/try-at-home/?">Try At Home</a></li>
+                </ul>
+              </div>
+              <div class="block lg:hidden">
+                <div
+                  class="block py-4 lg:py-0 border-b-[0.65px] border-white lg:pl-0 lg:pr-7 xl:pr-10 lg:border-none flex-1 text-sm "
+                  links="[object Object],[object Object],[object Object],[object Object]" role="region"
+                  aria-label="Accordion section"><button type="button" class="w-full focus:outline-none"
+                    aria-expanded="false" aria-controls="content-accordion-xg88ok8d7" id="accordion-xg88ok8d7"><button
+                      class="w-full text-white text-xs lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 flex flex-row justify-between uppercase items-center cursor-pointer focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50"
+                      aria-expanded="false"><span class="text-left whitespace-nowrap">Shop</span>
+                      <div class="text-theme-blue relative w-3 lg:w-4" aria-hidden="true"><span
+                          class="absolute w-full border-white left-0 border-0.5"></span><span
+                          class="absolute w-full border-0.5 border-white transition-all duration-300 left-0 rotate-90"></span>
+                      </div>
+                    </button></button>
+                  <div id="content-accordion-xg88ok8d7" class="relative overflow-hidden transition-all duration-500"
+                    role="region" aria-labelledby="accordion-xg88ok8d7" aria-hidden="true" data-collapsed="true"
+                    style="height: 0px;">
+                    <ul class="3xl:pb-0 space-y-2 lg:space-y-0 pt-3" role="menu">
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Engagement Rings" href="/engagement-rings/?">Engagement Rings</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Diamonds" href="/diamonds/?">Diamonds</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Wedding Bands" href="/wedding-rings/?">Wedding Bands</a></li>
+                      <li
+                        class="text-xs sm:text-sm lg:text-lg lg:leading-snug 4xl:text-3xl 4xl:leading-9 uppercase lg:normal-case text-white"
+                        role="menuitem"><a
+                          class="block py-1 hover:underline focus:underline focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50 whitespace-nowrap"
+                          aria-label="Try At Home" href="/try-at-home/?">Try At Home</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><button
+          class="ml-auto mt-36 mb-14 cursor-pointer hidden lg:flex items-center justify-end gap-2 text-white focus:outline-none focus:ring-2 focus:ring-midnight-blue focus:ring-opacity-50"
+          tabindex="0" role="button" aria-label="Scroll back to top of page">Scroll to top<svg
+            xmlns="http://www.w3.org/2000/svg" width="16" height="11" fill="none" viewBox="0 0 16 11"
+            class="w-4 h-4 -rotate-90">
+            <path id="Vector" fill="#ffffff"
+              d="M0 5.87h13.984l-4.15 4.476h1.54l4.553-4.995L11.374.346h-1.54l4.15 4.475H0z"></path>
+          </svg></button>
+        <div
+          class="lg:border-t border-gray-500 pt-16 lg:pt-6 flex flex-col lg:flex-row justify-between text-sm gap-16 lg:gap-0">
+          <p>We’re available by text and chat
+          <p class="pt-3 m-0">every day, 10 a.m. - 6 p.m. ET.</p>
+          </p>
+          <div class="flex flex-col space-y-3"><a href="mailto:hello@frankdarling.com"
+              class="flex items-center space-x-2"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="21"
+                fill="none" viewBox="0 0 19 21">
+                <g id="SVG" fill="#fff">
+                  <path id="Vector" d="M5.946 3.952h6.5a.399.399 0 1 0 0-.799h-6.5a.399.399 0 1 0 0 .8"></path>
+                  <path id="Vector_2" d="M5.946 6.193a.399.399 0 1 1 0-.8h6.5a.399.399 0 1 1 0 .8z"></path>
+                  <path id="Vector_3" d="M5.946 8.433h3.469a.399.399 0 1 0 0-.8H5.946a.399.399 0 1 0 0 .8"></path>
+                  <path id="Vector_4" fill-rule="evenodd"
+                    d="M3.226 3.555v.993L.61 7.318a.4.4 0 0 0-.1.355.4.4 0 0 0-.01.107v9.78c0 .219.179.398.4.398v.001q.02 0 .04-.002h16.54l.002.002c.221 0 .4-.178.4-.4V7.763a.4.4 0 0 0-.01-.092.4.4 0 0 0-.102-.353l-2.622-2.776v-.986c0-.221-.178-.4-.4-.4H3.625c-.22 0-.4.179-.4.4m11.125.397v5.003l-5.16 2.713-5.166-2.716V4.758a.4.4 0 0 0 0-.113v-.693zM3.226 5.71v2.822l-1.78-.936zm11.922 2.826V5.702l1.788 1.894zm-6.144 3.937a.4.4 0 0 0 .373 0l7.706-4.052v8.312l-5.303-4.211a.4.4 0 0 0-.495.624l5.054 4.014H2.044L8.34 12.16l.025-.022zm-1.409-.74-6.295 5v-8.31z"
+                    clip-rule="evenodd"></path>
+                </g>
+              </svg><span>hello@frankdarling.com</span></a><a href="tel:+16468590718"
+              class="flex items-center space-x-2"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="22"
+                fill="none" viewBox="0 0 19 22">
+                <g id="SVG">
+                  <path id="Vector" fill="#fff"
+                    d="M16.447 2.837H4.652a1.85 1.85 0 0 0-1.846 1.846v.046H2.76A1.85 1.85 0 0 0 .914 6.576v8.21a1.85 1.85 0 0 0 1.846 1.847H4.12c0 .441-.1 1.341-.825 2.255a.344.344 0 0 0 .27.555c2.227 0 3.653-2.16 4.03-2.81h6.965a1.85 1.85 0 0 0 1.846-1.846v-.047h.046a1.85 1.85 0 0 0 1.846-1.846v-8.21a1.85 1.85 0 0 0-1.846-1.847zm-.729 11.946c0 .64-.523 1.163-1.163 1.163H7.402s-.025.007-.036.007a.34.34 0 0 0-.284.178c-.01.025-1.085 2.064-2.82 2.53.607-1.1.554-2.085.522-2.355v-.018a.34.34 0 0 0-.256-.324.1.1 0 0 1-.036-.007c-.017 0-.032-.01-.05-.01H2.758c-.64 0-1.164-.524-1.164-1.164V6.576c0-.64.523-1.163 1.164-1.163H14.55c.64 0 1.163.523 1.163 1.163v8.21zm1.892-1.893c0 .64-.522 1.164-1.163 1.164h-.046V6.576a1.85 1.85 0 0 0-1.846-1.846H3.485v-.047c0-.64.524-1.163 1.164-1.163h11.795c.64 0 1.163.523 1.163 1.163v8.211z">
+                  </path>
+                </g>
+              </svg><span>(646) 859-0718</span></a></div>
+          <div class="flex space-x-3 lg:space-x-6"><a class="max-h-min" href="https://www.instagram.com/frankdarling/"
+              target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram (opens in new tab)"><img
+                loading="lazy" class="w-full" src="/assets/images/icons/instagram.svg" alt="Instagram icon"></a><a
+              class="max-h-min" href="https://twitter.com/frankdarlingny/" target="_blank" rel="noopener noreferrer"
+              aria-label="Follow us on Twitter (opens in new tab)"><img loading="lazy" class="full"
+                src="/assets/images/icons/twitter.svg" alt="Twitter icon"></a><a class="max-h-min"
+              href="https://www.facebook.com/frankdarlingny/" target="_blank" rel="noopener noreferrer"
+              aria-label="Follow us on Facebook (opens in new tab)"><img loading="lazy" class="w-full"
+                src="/assets/images/icons/facebook.svg" alt="Facebook icon"></a></div>
+        </div>
+        <div class="mt-24 lg:mt-16 text-center space-y-3"><img loading="lazy" class="relative block w-full"
+            src="/assets/images/icons/frank_darling.svg" alt="FRANK DARLING">
+          <p class="text-white text-s">© Frank Darling 2025</p>
+        </div>
+      </footer>
+      <script type="application/ld+json"
+        strategy="lazyOnload">{"@context":"https://schema.org","@type":"Organization","@id":"https://frankdarling.com/about/","name":"Frank Darling","url":"https://frankdarling.com","address":{"@type":"PostalAddress","addressLocality":"New York, NY","addressCountry":"United States","postalCode":"10013","streetAddress":"50 Hudson Street, Floor 3"},"logo":"https://frankdarling.com/assets/images/header/logo.svg","description":"Frank Darling provides the most accessible online custom engagment ring shopping experience. Build a unique engagement ring with our collection of Lab grown diamonds, natural diamonds and many more along with the help of our experts, for free.","sameAs":["https://www.facebook.com/frankdarlingny/","https://www.instagram.com/frankdarling/","https://twitter.com/frankdarlingny/"]}</script>
+    </div>
+    <div role="complementary" aria-label="Shopping cart">
+      <div
+        class="w-screen fixed top-0 left-0 right-0 bottom-0 z-[60] flex items-center justify-center transform transition-all duration-500 delay-100 ease-in bg-black bg-opacity-80 h-screen opacity-0 pointer-events-none scale-105"
+        role="dialog" aria-modal="true" aria-label="Information Dialog">
+        <div class="w-full relative">
+          <div class="grid grid-cols-24 gap-x-0 relative px-0">
+            <article
+              class="col-span-22 relative col-start-2 flex flex-col items-center justify-center p-6 md:p-5 bg-white  md:col-span-14 md:col-start-6 min-h-[25vw]">
+              <div class="w-12 h-12 absolute top-0 right-0 z-20"><button type="button"
+                  class="w-12 h-12 relative block pointer-events-none" aria-label="Close information dialog">
+                  <div class="w-12 h-12 relative flex items-center justify-center p-2"><svg
+                      class="w-12 h-12 relative block fill-current text-theme-blue" viewBox="0 0 39 39" fill="none">
+                      <rect x="10.6074" y="8.48535" width="27" height="3" transform="rotate(45 10.6074 8.48535)"></rect>
+                      <rect x="29.6992" y="10.6064" width="27" height="3" transform="rotate(135 29.6992 10.6064)">
+                      </rect>
+                    </svg></div>
+                </button></div>
+              <div
+                class="w-full relative flex text-center sm:text-left transition-all transform duration-500 delay-200 ease-in opacity-0 items-center justify-center "
+                style="transform: translate3d(0px, -6px, 0px);">
+                <h3
+                  class="text-theme-blue uppercase font-serif text-3xl leading-none sm:text-4/5xl sm:leading-tight md:text-6xl  md:leading-none hidden">
+                </h3>
+              </div>
+              <div class="w-full relative flex flex-col items-center">
+                <div
+                  class="relative text-theme-blue text-center transition-all transform duration-500 ease-in text-sm sm:text-2xl w-5/6 md:w-1/2 leading-tight sm:leading-none opacity-0 delay-100 pointer-events-none mt-8"
+                  style="transform: translate3d(0px, 12px, 0px);"></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="w-full">
+        <div
+          class="hidden w-screen h-screen transform-gpu transition-all duration-500 opacity-30 bg-black fixed inset-0 z-20"
+          aria-hidden="true"></div>
+        <div
+          class="fixed bottom-0 right-0 top-14 lg:top-12 pb-5 w-full md:w-vw-5/12 xl:w-vw-1/4 bg-white z-30 text-theme-blue transform-gpu overflow-hidden transition-all duration-300 overflow-y-scroll translate-x-full"
+          role="dialog" aria-labelledby="cart-heading" aria-modal="true" aria-hidden="true">
+          <h2 id="cart-heading" class="sr-only">Shopping Cart</h2>
+          <div class="flex justify-end w-full mt-12 sm:mt-12"><button class="h-8 w-8 mx-2 absolute lg:mt-20 my-3"
+              aria-label="Close cart"><svg xmlns="http://www.w3.org/2000/svg" class="" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12"></path>
+              </svg></button></div>
+          <div class="px-8 font-sans text-theme-blue text-center pt-24 lg:pt-32">
+            <h2
+              class="mb-8 text-lg md:text-2xl 3xl:text-3xl 4xl:text-4/5xl leading-tight md:leading-tight 3xl:leading-none uppercase">
+              Your cart is currently empty</h2>
+            <p class="text-lg 3xl:text-2xl 4xl:text-3xl leading-6 3xl:leading-tight"><a
+                class="underline hover:no-underline" href="/wishlist/?">View your wishlist</a> or <a
+                class="underline hover:no-underline" href="/engagement-rings/?">view all rings.</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fixed bottom-0 w-full" role="alertdialog" aria-label="Cookie consent" style="z-index: 2147483647;">
+      <div class="hidden  bg-theme-blue text-white transition-all duration-500 overflow-hidden px-7 py-4">
+        <div class="flex flex-row justify-between items-center group space-x-3">
+          <h3 class="text-xs block flex-1 focus:outline-none uppercase">This site uses cookies (not the chocolate kind)
+            to store preferences and personalize our marketing. By clicking allow, you consent to use our cookies.</h3>
+          <div class="flex flex-col space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0 text-xs"><button
+              class="cookie-deny-button text-white border border-white px-4 sm:px-9 py-2">DENY</button><button
+              class=" text-theme-blue bg-white px-4 sm:px-9 py-2 hover:bg-gray-300">ALLOW</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -113,7 +113,70 @@
             </template>
           </div>
         </section>
+
+        <div class="w-40 absolute top-8 right-8 z-20 flex justify-between"
+          x-data="{ showTryOnTooltip: false, showWishlistTooltip: false }">
+
+          <!-- Add to Home Try On Icon -->
+          <a class="text-theme-blue block relative cursor-pointer" @mouseenter="showTryOnTooltip = true"
+            @mouseleave="showTryOnTooltip = false" @click="/* Add your click functionality here */">
+            <span>
+              <svg class="h-8 w-8 text-theme-blue" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M0 20.5C0 31.8218 9.17816 41 20.5 41C31.8218 41 41 31.8218 41 20.5C41 9.17816 31.8218 0 20.5 0C9.17816 0 0 9.17816 0 20.5ZM20.5 39.0866C30.7651 39.0866 39.0867 30.7651 39.0867 20.5C39.0867 10.2348 30.7651 1.91331 20.5 1.91331C10.2349 1.91331 1.91335 10.2348 1.91335 20.5C1.91335 30.7651 10.2349 39.0866 20.5 39.0866ZM19.8167 19.5434V14.1127V13.156H21.73V14.1127V19.5434H27.06H28.0167V21.4567H27.06H21.73V26.8874V27.8441H19.8167V26.8874V21.4567H14.2133H13.2567V19.5434H14.2133H19.8167Z"
+                  class="fill-current"></path>
+              </svg>
+            </span>
+            <!-- Tooltip for Add to Home Try On -->
+            <div x-show="showTryOnTooltip"
+              class="-right-1.5 top-11 z-10 w-48 bg-white text-theme-blue before:border-transparentBlue after:border-transparentWhite ring-tooltip absolute border border-theme-blue flex justify-center transition-all duration-200 transform"
+              x-transition:enter="transition ease-out duration-200"
+              x-transition:enter-start="opacity-0 -translate-y-full" x-transition:enter-end="opacity-100 translate-y-0"
+              x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
+              x-transition:leave-end="opacity-0 -translate-y-full">
+              <p class="text-lg leading-snug text-center">Add to Home Try On</p>
+            </div>
+          </a>
+
+          <!-- Share Icon -->
+          <a class="text-theme-blue block relative cursor-pointer" @click="/* Add your click functionality here */">
+            <span>
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" class="h-8 w-8"
+                xmlns="http://www.w3.org/2000/svg">
+                <rect width="26" height="26"></rect>
+                <path
+                  d="M22.9409 3.05866C22.7633 2.87829 22.5402 2.74928 22.2953 2.68528C22.0504 2.62128 21.7927 2.62466 21.5495 2.69506H21.5383L2.04545 8.60905C1.76767 8.68862 1.52072 8.85094 1.3375 9.07439C1.15428 9.29784 1.04349 9.5718 1.01989 9.8598C0.996285 10.1478 1.06099 10.4361 1.20538 10.6864C1.34976 10.9367 1.56699 11.1371 1.82811 11.2608L10.5229 15.3792C10.5648 15.3998 10.5988 15.4337 10.6194 15.4757L14.7387 24.1715C14.8525 24.415 15.0335 24.6208 15.2604 24.7648C15.4873 24.9088 15.7507 24.9848 16.0194 24.984C16.0601 24.984 16.1017 24.984 16.1423 24.9789C16.4302 24.9563 16.7042 24.8459 16.9274 24.6626C17.1506 24.4794 17.3123 24.2321 17.3905 23.9541L23.3015 4.46124V4.45006C23.3723 4.20717 23.3761 3.94966 23.3127 3.70475C23.2492 3.45984 23.1208 3.23661 22.9409 3.05866ZM22.1284 4.11491L16.2226 23.6058V23.6169C16.213 23.6577 16.1904 23.6942 16.1581 23.7208C16.1258 23.7474 16.0856 23.7626 16.0438 23.7642C16.0019 23.7705 15.959 23.7625 15.9222 23.7415C15.8853 23.7205 15.8566 23.6877 15.8407 23.6484L11.7782 15.0806L16.6776 10.1812C16.7919 10.0669 16.8561 9.91181 16.8561 9.7501C16.8561 9.5884 16.7919 9.43331 16.6776 9.31897C16.5632 9.20463 16.4081 9.14039 16.2464 9.14039C16.0847 9.14039 15.9296 9.20463 15.8153 9.31897L10.92 14.2183L2.35116 10.1558C2.31351 10.1383 2.28214 10.1096 2.26129 10.0737C2.24043 10.0378 2.23109 9.99634 2.23452 9.95495C2.23796 9.91356 2.25399 9.87421 2.28048 9.84221C2.30696 9.81022 2.34262 9.78711 2.38264 9.776H2.39381L21.8847 3.8671C21.9189 3.85748 21.9551 3.85731 21.9895 3.86661C22.0238 3.87591 22.055 3.89432 22.0797 3.91991C22.1047 3.94498 22.1228 3.97617 22.132 4.01038C22.1413 4.04459 22.1415 4.08062 22.1325 4.11491H22.1284Z"
+                  fill="#1C1794"></path>
+              </svg>
+            </span>
+          </a>
+
+          <!-- Add to Wishlist Icon -->
+          <a class="text-theme-blue block relative cursor-pointer" @mouseenter="showWishlistTooltip = true"
+            @mouseleave="showWishlistTooltip = false" @click="/* Add your click functionality here */">
+            <span>
+              <svg class="h-8 w-8 text-theme-blue" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="Icons/misc/Heart/Outline">
+                  <path id="Mask" fill-rule="evenodd" clip-rule="evenodd"
+                    d="M62.7758 7.74005C53.7123 4.06519 44.23 7.28152 38.2535 15.9344C32.2761 7.28152 22.7938 4.06233 13.7293 7.74005C5.22935 11.188 -2.46076 21.2384 0.742173 35.157C6.2625 59.1623 36.6032 71.6883 37.8922 72.2097C38.0082 72.2564 38.1309 72.2803 38.2535 72.2803C38.3762 72.2803 38.4989 72.2574 38.6148 72.2097C39.9039 71.6883 70.2417 59.1623 75.7649 35.157C78.9669 21.2384 71.2767 11.188 62.7758 7.74005ZM72.4773 34.9102C67.6903 55.7105 41.5819 67.6131 38.2535 69.0528C34.9242 67.6149 8.81577 55.7251 4.02972 34.9102C1.19453 22.5875 7.93696 13.7164 15.4008 10.6895C17.6627 9.77148 19.8289 9.36874 21.8737 9.36874C28.8682 9.36874 34.4291 14.0844 37.4686 19.0215C37.8026 19.5643 38.7026 19.5643 39.0385 19.0215C42.965 12.6428 51.0997 6.63291 61.1043 10.6895C68.5692 13.7164 75.3116 22.5875 72.4773 34.9102Z"
+                    class="fill-current"></path>
+                </g>
+              </svg>
+            </span>
+            <!-- Tooltip for Add to Wishlist -->
+            <div x-show="showWishlistTooltip"
+              class="-right-1.5 top-11 z-10 w-36 bg-white text-theme-blue before:border-transparentBlue after:border-transparentWhite ring-tooltip absolute border border-theme-blue flex justify-center transition-all duration-200 transform"
+              x-transition:enter="transition ease-out duration-200"
+              x-transition:enter-start="opacity-0 -translate-y-full" x-transition:enter-end="opacity-100 translate-y-0"
+              x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
+              x-transition:leave-end="opacity-0 -translate-y-full">
+              <p class="text-lg leading-snug text-center">Add to Wishlist</p>
+            </div>
+          </a>
+        </div>
       </section>
+
+
 
       <!-- Ring Details Section -->
       <div class="flex flex-col border-b border-white md:border-theme-blue">
